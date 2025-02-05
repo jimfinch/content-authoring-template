@@ -95,7 +95,7 @@ export function NavLinks({ items }: NavLinksProps) {
 						<Link
 							href={
 								item.url.documentType == "page"
-									? item.url.internalUrl
+									? "/" + item.url.internalUrl
 									: "/" +
 										item.url.documentType +
 										"/" +
@@ -106,6 +106,7 @@ export function NavLinks({ items }: NavLinksProps) {
 							{item.text}
 						</Link>
 					)}
+
 					{item.url.manualUrl && (
 						<Link
 							href={item.url.manualUrl}
@@ -114,6 +115,7 @@ export function NavLinks({ items }: NavLinksProps) {
 							{item.text}
 						</Link>
 					)}
+
 					{item.url.externalUrl && (
 						<Link
 							href={item.url.externalUrl}

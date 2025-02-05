@@ -91,6 +91,9 @@ export const PAGE_QUERY =
   ...,
   content[]{
     ...,
+    video {
+        'url': asset->url,
+    }
   }
 }`)
 
@@ -99,22 +102,27 @@ export const HOME_PAGE_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
       ...,
       content[]{
         ...,
+        video {
+            'url': asset->url,
+        }
       }      
     }
 }`)
 
 export const PRIMARYNAVIGATION_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
-    primaryNav-> {
+    title,
+    image,
+    primaryNav->{
         navId,
         items[]{
             _key,
             text,
             url{
-                "internalUrl": internalLink->slug.current,
+                "internalUrl": internalUrl->slug.current,
                 manualUrl,
                 externalUrl,
-                "documentType": internalLink->_type,
+                "documentType": internalUrl->_type,
             }
         }
-    }
+    },
 }`)

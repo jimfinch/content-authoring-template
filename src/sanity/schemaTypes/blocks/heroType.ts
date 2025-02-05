@@ -16,5 +16,9 @@ export const heroType = defineType({
 			name: "image",
 			type: "image",
 		}),
+		defineField({
+			name: "video",
+			type: "file",
+		}),
 	],
 })

@@ -1,10 +1,10 @@
-import { DocumentTextIcon } from "@sanity/icons"
+import { BlockContentIcon } from "@sanity/icons"
 import { defineField, defineType } from "sanity"
 
 export const statementType = defineType({
 	name: "statement",
 	type: "object",
-	icon: DocumentTextIcon,
+	icon: BlockContentIcon,
 	fields: [
 		defineField({
 			name: "text",

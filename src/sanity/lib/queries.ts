@@ -101,4 +101,20 @@ export const HOME_PAGE_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
         ...,
       }      
     }
-  }`)
+}`)
+
+export const PRIMARYNAVIGATION_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
+    primaryNav-> {
+        navId,
+        items[]{
+            _key,
+            text,
+            url{
+                "internalUrl": internalLink->slug.current,
+                manualUrl,
+                externalUrl,
+                "documentType": internalLink->_type,
+            }
+        }
+    }
+}`)

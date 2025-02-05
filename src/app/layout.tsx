@@ -5,7 +5,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className="antialiased">{children}</body>
+			<body className="text-base leading-relaxed antialiased">
+				{children}
+			</body>
 		</html>
 	)
 }

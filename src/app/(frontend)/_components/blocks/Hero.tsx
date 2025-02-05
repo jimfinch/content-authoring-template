@@ -22,10 +22,10 @@ export function Hero({ title, text, image }: HeroProps) {
 					{text ? <PortableText value={text} /> : null}
 				</div>
 			</div>
-			<div className="absolute inset-0 bg-pink-500 opacity-50 z-10" />
+			<div className="absolute inset-0 bg-black opacity-50 z-10" />
 			{image ? (
 				<Image
-					className="absolute inset-0 object-cover blur-sm"
+					className="absolute inset-0 object-cover blur-sm w-full h-full"
 					src={urlFor(image).width(1600).height(800).url()}
 					width={1600}
 					height={800}

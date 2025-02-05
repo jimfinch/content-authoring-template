@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<>
-			<Header className="py-3 px-4">
+			<Header className="fixed top-0 z-10 flex w-full items-center justify-between px-10 py-6">
 				<Menu>{children}</Menu>
 			</Header>
 			{children}

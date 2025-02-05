@@ -32,7 +32,7 @@ export function Project(props: NonNullable<PROJECT_QUERYResult>) {
 				</figure>
 			) : null}
 			{body ? (
-				<div className="lg:col-span-7 lg:col-start-6 prose lg:prose-lg">
+				<div className="lg:col-span-7 lg:col-start-6 prose prose-invert lg:prose-lg">
 					<PortableText value={body} components={components} />
 				</div>
 			) : null}

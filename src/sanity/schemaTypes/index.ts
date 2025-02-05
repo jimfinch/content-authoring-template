@@ -11,6 +11,9 @@ import { heroType } from "./blocks/heroType"
 import { splitImageType } from "./blocks/splitImageType"
 import { statementType } from "./blocks/statementType"
 import { siteSettingsType } from "./siteSettingsType"
+import { navigationType } from "./navigationType"
+import { navigationItemType } from "./objects/navigationItemType"
+import { linkType } from "./objects/linkType"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -25,5 +28,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		splitImageType,
 		statementType,
 		siteSettingsType,
+		navigationType,
+		navigationItemType,
+		linkType,
 	],
 }

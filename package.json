@@ -1,33 +1,36 @@
 {
-  "name": "portfolio-template",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@sanity/icons": "^3.5.7",
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.74.0",
-    "next": "15.1.6",
-    "next-sanity": "^9.8.49",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sanity": "^3.74.0",
-    "styled-components": "^6.1.14"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
-  }
+	"name": "portfolio-template",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"predev": "npm run typegen",
+		"prebuild": "npm run typegen",
+		"typegen": "sanity schema extract --path=./src/sanity/extract.json && sanity typegen generate"
+	},
+	"dependencies": {
+		"@sanity/icons": "^3.5.7",
+		"@sanity/image-url": "^1.1.0",
+		"@sanity/vision": "^3.74.0",
+		"next": "15.1.6",
+		"next-sanity": "^9.8.49",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"sanity": "^3.74.0",
+		"styled-components": "^6.1.14"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"eslint": "^9",
+		"eslint-config-next": "15.1.6",
+		"postcss": "^8",
+		"tailwindcss": "^3.4.1",
+		"typescript": "^5"
+	}
 }

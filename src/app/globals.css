@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fonts */
+@layer base {
+	@font-face {
+		font-family: "PP Neue Montreal";
+		font-stretch: normal;
+		font-style: normal;
+		font-weight: normal;
+		font-display: swap;
+		src:
+			local("PP Neue Montral"),
+			url("../../public/fonts/PPNeueMontreal-Book.otf") format("opentype");
+	}
+
+	@font-face {
+		font-family: "PP Neue Montreal";
+		font-stretch: normal;
+		font-style: normal;
+		font-weight: 700;
+		font-display: swap;
+		src:
+			local("PP Neue Montral"),
+			url("../../public/fonts/PPNeueMontreal-Medium.otf")
+				format("opentype");
+	}
+}
+
+body {
+	color: var(--foreground);
+	background: var(--background);
+	font-family: "PP Neue Montreal", sans-serif;
+}

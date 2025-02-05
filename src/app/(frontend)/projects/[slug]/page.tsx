@@ -1,7 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/live"
 import { PROJECT_QUERY } from "@/sanity/lib/queries"
+import { Project } from "@/app/(frontend)/_components/project/Project"
 import { notFound } from "next/navigation"
-import Link from "next/link"
 
 export default async function Page({
 	params,
@@ -18,12 +18,8 @@ export default async function Page({
 	}
 
 	return (
-		<main className="container mx-auto grid grid-cols-1 gap-6 p-12">
-			<h1 className="text-4xl font-bold text-balance">
-				{project?.title}
-			</h1>
-			<hr />
-			<Link href="/projects">&larr; Return to index</Link>
+		<main>
+			<Project {...project} />
 		</main>
 	)
 }

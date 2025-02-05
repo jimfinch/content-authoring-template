@@ -8,7 +8,7 @@ export default function Footer({
 }) {
 	return (
 		<footer className={className} {...props}>
-			{children}
+			Footer Content
 		</footer>
 	)
 }

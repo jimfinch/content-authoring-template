@@ -1,8 +1,9 @@
 import { SanityLive } from "@/sanity/lib/live"
 import type { Metadata } from "next"
 import "@/app/globals.css"
-import Footer from "@/app/_components/footer/Footer"
-import Header from "@/app/_components/header/Header"
+import Footer from "@/app/(frontend)/_components/footer/Footer"
+import Header from "@/app/(frontend)/_components/header/Header"
+import { Menu } from "./_components/menu/Menu"
 
 export const metadata: Metadata = {
 	title: "Portfolio Template",
@@ -16,13 +17,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<>
-			<Header>
-				<p>Header</p>
+			<Header className="py-3 px-4">
+				<Menu>{children}</Menu>
 			</Header>
 			{children}
-			<Footer>
-				<p>Footer Content</p>
-			</Footer>
+			<Footer>{children}</Footer>
 
 			<SanityLive />
 		</>

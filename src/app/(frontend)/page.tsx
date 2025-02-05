@@ -1,14 +1,13 @@
-import Link from "next/link"
+import { PageBuilder } from "@/app/(frontend)/_components/pagebuilder/PageBuilder"
+import { sanityFetch } from "@/sanity/lib/live"
+import { HOME_PAGE_QUERY } from "@/sanity/lib/queries"
 
 export default async function Page() {
-	return (
-		<main>
-			<section className="container mx-auto grid grid-cols-1 gap-6 p-12">
-				<h1 className="text-4xl font-bold">Home</h1>
-				<hr />
-				<Link href="/projects">Project index &rarr;</Link>
-				<Link href="/articles">Articles index &rarr;</Link>
-			</section>
-		</main>
-	)
+	const { data: page } = await sanityFetch({
+		query: HOME_PAGE_QUERY,
+	})
+
+	return page?.homePage?.content ? (
+		<PageBuilder content={page?.homePage.content} />
+	) : null
 }

@@ -7,14 +7,31 @@ export const structure: StructureResolver = (S) =>
 		.items([
 			S.documentTypeListItem("project").title("Projects"),
 			S.documentTypeListItem("article").title("Articles"),
+			S.documentTypeListItem("page").title("Pages"),
+			S.divider(),
 			S.documentTypeListItem("category").title("Categories"),
 			S.documentTypeListItem("author").title("Authors"),
 			S.divider(),
+			S.listItem()
+				.id("siteSettings")
+				.schemaType("siteSettings")
+				.title("Site Settings")
+				.child(
+					S.editor()
+						.id("siteSettings")
+						.schemaType("siteSettings")
+						.documentId("siteSettings")
+				),
 			...S.documentTypeListItems().filter(
 				(item) =>
 					item.getId() &&
-					!["project", "article", "category", "author"].includes(
-						item.getId()!
-					)
+					![
+						"project",
+						"article",
+						"page",
+						"category",
+						"author",
+						"siteSettings",
+					].includes(item.getId()!)
 			),
 		])

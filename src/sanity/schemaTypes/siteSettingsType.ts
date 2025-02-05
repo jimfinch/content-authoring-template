@@ -8,9 +8,32 @@ export const siteSettingsType = defineType({
 	icon: ControlsIcon,
 	fields: [
 		defineField({
+			title: "Add a site title",
+			name: "title",
+			type: "string",
+		}),
+		defineField({
+			title: "Add a site description",
+			name: "description",
+			type: "string",
+		}),
+		defineField({
+			title: "Add a logo",
+			name: "image",
+			type: "image",
+		}),
+		defineField({
+			title: "Set a homepage",
 			name: "homePage",
 			type: "reference",
 			to: [{ type: "page" }],
+		}),
+		defineField({
+			title: "Primary navigation",
+			name: "primaryNav",
+			description: "Select a menu for primary navigation",
+			type: "reference",
+			to: { type: "navigation" },
 		}),
 	],
 	preview: {

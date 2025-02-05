@@ -11,6 +11,7 @@ export const structure: StructureResolver = (S) =>
 			S.divider(),
 			S.documentTypeListItem("category").title("Categories"),
 			S.documentTypeListItem("author").title("Authors"),
+			S.documentTypeListItem("navigation").title("Menus"),
 			S.divider(),
 			S.listItem()
 				.id("siteSettings")
@@ -32,6 +33,7 @@ export const structure: StructureResolver = (S) =>
 						"category",
 						"author",
 						"siteSettings",
+						"navigation",
 					].includes(item.getId()!)
 			),
 		])

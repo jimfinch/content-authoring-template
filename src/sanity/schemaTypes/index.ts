@@ -14,6 +14,7 @@ import { siteSettingsType } from "./siteSettingsType"
 import { navigationType } from "./navigationType"
 import { navigationItemType } from "./objects/navigationItemType"
 import { linkType } from "./objects/linkType"
+import { featuredType } from "./blocks/featuredType"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -31,5 +32,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		navigationType,
 		navigationItemType,
 		linkType,
+		featuredType,
 	],
 }

@@ -5,7 +5,7 @@ import { NavLinks } from "./NavLinks"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 
-export async function Menu() {
+export async function Menu({ children }) {
 	const { data: nav } = await sanityFetch({
 		query: PRIMARYNAVIGATION_QUERY,
 	})
@@ -34,7 +34,7 @@ export async function Menu() {
 				</Link>
 			</div>
 
-			<NavLinks items={items} />
+			<NavLinks items={items}>{children}</NavLinks>
 
 			<div className="flex overflow-hidden h-max w-fit justify-end">
 				<Link

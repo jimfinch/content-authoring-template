@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion } from "motion/react"
 import { useRef, useState } from "react"
+import HandleUrl from "../_utils/handleUrl"
 
 interface NavItem {
 	_key: string
@@ -93,14 +94,7 @@ export function NavLinks({ items }: NavLinksProps) {
 				>
 					{item.url.internalUrl && (
 						<Link
-							href={
-								item.url.documentType == "page"
-									? "/" + item.url.internalUrl
-									: "/" +
-										item.url.documentType +
-										"/" +
-										item.url.internalUrl
-							}
+							href={HandleUrl(item.url)}
 							className="rounded-full bg-opacity-50 px-5 py-2 transition duration-300 ease-in-out font-bold"
 						>
 							{item.text}

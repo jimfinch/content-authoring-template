@@ -46,15 +46,10 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type NavigationItem = {
-  _type: "navigationItem";
-  text?: string;
-  url?: Link;
-};
-
-export type Link = {
-  _type: "link";
-  internalUrl?: {
+export type Featured = {
+  _type: "featured";
+  title?: string;
+  documents?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -63,15 +58,19 @@ export type Link = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
+    [internalGroqTypeReferenceTo]?: "article";
   } | {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "article";
-  };
-  manualUrl?: string;
-  externalUrl?: string;
+    [internalGroqTypeReferenceTo]?: "page";
+  }>;
+};
+
+export type NavigationItem = {
+  _type: "navigationItem";
+  text?: string;
+  url?: Link;
 };
 
 export type SiteSettings = {
@@ -138,6 +137,7 @@ export type SplitImage = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
 };
@@ -175,6 +175,8 @@ export type Hero = {
     _type: "image";
     _key: string;
   }>;
+  linkText?: string;
+  url?: Link;
   image?: {
     asset?: {
       _ref: string;
@@ -184,6 +186,7 @@ export type Hero = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
   video?: {
@@ -197,13 +200,37 @@ export type Hero = {
   };
 };
 
+export type Link = {
+  _type: "link";
+  internalUrl?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "project";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "page";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "article";
+  };
+  manualUrl?: string;
+  externalUrl?: string;
+};
+
 export type PageBuilder = Array<{
   _key: string;
 } & Hero | {
   _key: string;
 } & SplitImage | {
   _key: string;
-} & Statement>;
+} & Statement | {
+  _key: string;
+} & Featured>;
 
 export type Page = {
   _id: string;
@@ -525,7 +552,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | NavigationItem | Link | SiteSettings | Navigation | Statement | SplitImage | Hero | PageBuilder | Page | SanityFileAsset | Project | Article | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Featured | NavigationItem | SiteSettings | Navigation | Statement | SplitImage | Hero | Link | PageBuilder | Page | SanityFileAsset | Project | Article | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: PROJECTS_QUERY
@@ -666,7 +693,7 @@ export type PROJECT_QUERYResult = {
   } | null;
 } | null;
 // Variable: ARTICLES_QUERY
-// Query: *[_type == "article" && defined(slug.current)]|order(publishedAt desc)[0...12]{  _id,  title,  slug,  body,  mainImage,  publishedAt,  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
+// Query: *[_type == "article" && defined(slug.current)]|order(publishedAt desc)[0...12]{    _id,    title,    slug,    body,    mainImage,    publishedAt,    "categories": coalesce(        categories[]->{            _id,            slug,            title        },    []),    author->{        name,        image    }}
 export type ARTICLES_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -735,7 +762,7 @@ export type ARTICLES_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: ARTICLE_QUERY
-// Query: *[_type == "article" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
+// Query: *[_type == "article" && slug.current == $slug][0]{    _id,    title,    body,    mainImage,    publishedAt,    "categories": coalesce(        categories[]->{            _id,            slug,            title        },    []),    author->{        name,        image    }}
 export type ARTICLE_QUERYResult = {
   _id: string;
   title: string | null;
@@ -803,7 +830,7 @@ export type ARTICLE_QUERYResult = {
   } | null;
 } | null;
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{  ...,  content[]{    ...,  }}
+// Query: *[_type == "page" && slug.current == $slug][0]{    ...,    content[]{        ...,        video {        'url': asset->url,        },        url{            "internalUrl": internalUrl->slug.current,            manualUrl,            externalUrl,            "documentType": internalUrl->_type,        },        linkText    }}
 export type PAGE_QUERYResult = {
   _id: string;
   _type: "page";
@@ -813,6 +840,29 @@ export type PAGE_QUERYResult = {
   title?: string;
   slug?: Slug;
   content: Array<{
+    _key: string;
+    _type: "featured";
+    title?: string;
+    documents?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "article";
+    } | {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "page";
+    } | {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "project";
+    }>;
+    video: null;
+    url: null;
+    linkText: null;
+  } | {
     _key: string;
     _type: "hero";
     title?: string;
@@ -846,6 +896,13 @@ export type PAGE_QUERYResult = {
       _type: "image";
       _key: string;
     }>;
+    linkText: string | null;
+    url: {
+      internalUrl: string | null;
+      manualUrl: string | null;
+      externalUrl: string | null;
+      documentType: "article" | "page" | "project" | null;
+    } | null;
     image?: {
       asset?: {
         _ref: string;
@@ -855,17 +912,12 @@ export type PAGE_QUERYResult = {
       };
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
+      alt?: string;
       _type: "image";
     };
-    video?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-      };
-      _type: "file";
-    };
+    video: {
+      url: string | null;
+    } | null;
   } | {
     _key: string;
     _type: "splitImage";
@@ -880,12 +932,19 @@ export type PAGE_QUERYResult = {
       };
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
+      alt?: string;
       _type: "image";
     };
+    video: null;
+    url: null;
+    linkText: null;
   } | {
     _key: string;
     _type: "statement";
     text?: string;
+    video: null;
+    url: null;
+    linkText: null;
   }> | null;
   mainImage?: {
     asset?: {
@@ -900,7 +959,7 @@ export type PAGE_QUERYResult = {
   };
 } | null;
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "siteSettings"][0]{    homePage->{      ...,      content[]{        ...,      }          }}
+// Query: *[_id == "siteSettings"][0]{    homePage->{        ...,        content[]{            ...,            _type == 'hero' => {                video {                    'url': asset->url,                },                url{                    "internalUrl": internalUrl->slug.current,                    manualUrl,                    externalUrl,                    "documentType": internalUrl->_type,                },                linkText,            },            _type == 'featured' => {                documents[]->{                    _id,                    _type,                    title,                    slug,                    mainImage,                    "categories": coalesce(                        categories[]->{                            _id,                            slug,                            title                        },                    []),                    author->{                        name,                        image                    }                                    }            }        }          }}
 export type HOME_PAGE_QUERYResult = {
   homePage: null;
 } | {
@@ -913,6 +972,101 @@ export type HOME_PAGE_QUERYResult = {
     title?: string;
     slug?: Slug;
     content: Array<{
+      _key: string;
+      _type: "featured";
+      title?: string;
+      documents: Array<{
+        _id: string;
+        _type: "article";
+        title: string | null;
+        slug: Slug | null;
+        mainImage: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          slug: Slug | null;
+          title: string | null;
+        }> | Array<never>;
+        author: {
+          name: string | null;
+          image: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+      } | {
+        _id: string;
+        _type: "page";
+        title: string | null;
+        slug: Slug | null;
+        mainImage: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        categories: Array<never>;
+        author: null;
+      } | {
+        _id: string;
+        _type: "project";
+        title: string | null;
+        slug: Slug | null;
+        mainImage: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          slug: Slug | null;
+          title: string | null;
+        }> | Array<never>;
+        author: {
+          name: string | null;
+          image: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+        } | null;
+      }> | null;
+    } | {
       _key: string;
       _type: "hero";
       title?: string;
@@ -946,6 +1100,13 @@ export type HOME_PAGE_QUERYResult = {
         _type: "image";
         _key: string;
       }>;
+      linkText: string | null;
+      url: {
+        internalUrl: string | null;
+        manualUrl: string | null;
+        externalUrl: string | null;
+        documentType: "article" | "page" | "project" | null;
+      } | null;
       image?: {
         asset?: {
           _ref: string;
@@ -955,17 +1116,12 @@ export type HOME_PAGE_QUERYResult = {
         };
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
+        alt?: string;
         _type: "image";
       };
-      video?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-        };
-        _type: "file";
-      };
+      video: {
+        url: string | null;
+      } | null;
     } | {
       _key: string;
       _type: "splitImage";
@@ -980,6 +1136,7 @@ export type HOME_PAGE_QUERYResult = {
         };
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
+        alt?: string;
         _type: "image";
       };
     } | {
@@ -1054,10 +1211,10 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"project\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": PROJECTS_QUERYResult;
     "*[_type == \"project\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": PROJECT_QUERYResult;
-    "*[_type == \"article\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": ARTICLES_QUERYResult;
-    "*[_type == \"article\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": ARTICLE_QUERYResult;
-    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  content[]{\n    ...,\n  }\n}": PAGE_QUERYResult;
-    "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n      }      \n    }\n}": HOME_PAGE_QUERYResult;
-    "*[_id == \"siteSettings\"][0]{\n    title,\n    image,\n    primaryNav->{\n        navId,\n        items[]{\n            _key,\n            text,\n            url{\n                \"internalUrl\": internalUrl->slug.current,\n                manualUrl,\n                externalUrl,\n                \"documentType\": internalUrl->_type,\n            }\n        }\n    },\n}": PRIMARYNAVIGATION_QUERYResult;
+    "\n*[_type == \"article\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLES_QUERYResult;
+    "\n*[_type == \"article\" && slug.current == $slug][0]{\n    _id,\n    title,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLE_QUERYResult;
+    "\n*[_type == \"page\" && slug.current == $slug][0]{\n    ...,\n    content[]{\n        ...,\n        video {\n        'url': asset->url,\n        },\n        url{\n            \"internalUrl\": internalUrl->slug.current,\n            manualUrl,\n            externalUrl,\n            \"documentType\": internalUrl->_type,\n        },\n        linkText\n    }\n}\n": PAGE_QUERYResult;
+    "\n*[_id == \"siteSettings\"][0]{\n    homePage->{\n        ...,\n        content[]{\n            ...,\n            _type == 'hero' => {\n                video {\n                    'url': asset->url,\n                },\n                url{\n                    \"internalUrl\": internalUrl->slug.current,\n                    manualUrl,\n                    externalUrl,\n                    \"documentType\": internalUrl->_type,\n                },\n                linkText,\n            },\n            _type == 'featured' => {\n                documents[]->{\n                    _id,\n                    _type,\n                    title,\n                    slug,\n                    mainImage,\n                    \"categories\": coalesce(\n                        categories[]->{\n                            _id,\n                            slug,\n                            title\n                        },\n                    []),\n                    author->{\n                        name,\n                        image\n                    }                    \n                }\n            }\n        }      \n    }\n}\n": HOME_PAGE_QUERYResult;
+    "\n*[_id == \"siteSettings\"][0]{\n    title,\n    image,\n    primaryNav->{\n        navId,\n        items[]{\n            _key,\n            text,\n            url{\n                \"internalUrl\": internalUrl->slug.current,\n                manualUrl,\n                externalUrl,\n                \"documentType\": internalUrl->_type,\n            }\n        }\n    },\n}\n": PRIMARYNAVIGATION_QUERYResult;
   }
 }

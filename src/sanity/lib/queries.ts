@@ -168,3 +168,23 @@ export const PRIMARYNAVIGATION_QUERY = defineQuery(`
     },
 }
 `)
+
+export const FOOTERNAVIGATION_QUERY = defineQuery(`
+    *[_id == "siteSettings"][0]{
+        title,
+        image,
+        footerNav->{
+            navId,
+            items[]{
+                _key,
+                text,
+                url{
+                    "internalUrl": internalUrl->slug.current,
+                    manualUrl,
+                    externalUrl,
+                    "documentType": internalUrl->_type,
+                }
+            }
+        },
+    }
+    `)

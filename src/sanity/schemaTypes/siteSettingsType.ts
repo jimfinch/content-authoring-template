@@ -45,6 +45,13 @@ export const siteSettingsType = defineType({
 			type: "reference",
 			to: { type: "navigation" },
 		}),
+		defineField({
+			title: "Footer navigation",
+			name: "footerNav",
+			description: "Select a menu for footer navigation",
+			type: "reference",
+			to: { type: "navigation" },
+		}),
 	],
 	preview: {
 		prepare() {

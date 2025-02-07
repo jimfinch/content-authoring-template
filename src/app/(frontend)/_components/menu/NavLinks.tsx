@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { motion } from "motion/react"
 import { useRef, useState } from "react"
-import HandleUrl from "../_utils/handleUrl"
+import HandleUrl from "../_utils/HandleUrl"
 
 interface NavItem {
 	_key: string

@@ -9,7 +9,7 @@ import { PAGE_QUERYResult } from "@/sanity/types"
 import Video from "../video/Video"
 import { motion, useScroll, useTransform } from "motion/react"
 import Link from "next/link"
-import HandleUrl from "../_utils/handleUrl"
+import HandleUrl from "../_utils/HandleUrl"
 
 type HeroProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],

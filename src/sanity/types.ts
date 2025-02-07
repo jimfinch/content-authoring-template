@@ -104,6 +104,12 @@ export type SiteSettings = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "navigation";
   };
+  footerNav?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "navigation";
+  };
 };
 
 export type Navigation = {
@@ -959,7 +965,7 @@ export type PAGE_QUERYResult = {
   };
 } | null;
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "siteSettings"][0]{    homePage->{        ...,        content[]{            ...,            _type == 'hero' => {                video {                    'url': asset->url,                },                url{                    "internalUrl": internalUrl->slug.current,                    manualUrl,                    externalUrl,                    "documentType": internalUrl->_type,                },                linkText,            },            _type == 'featured' => {                documents[]->{                    _id,                    _type,                    title,                    slug,                    mainImage,                    "categories": coalesce(                        categories[]->{                            _id,                            slug,                            title                        },                    []),                    author->{                        name,                        image                    }                                    }            }        }          }}
+// Query: *[_id == "siteSettings"][0]{    homePage->{        ...,        content[]{            ...,            _type == 'hero' => {                video {                    'url': asset->url,                },                url{                    "internalUrl": internalUrl->slug.current,                    manualUrl,                    externalUrl,                    "documentType": internalUrl->_type,                },                linkText,            },            _type == 'featured' => {                title,                documents[]->{                    _id,                    _type,                    title,                    slug,                    mainImage,                    "categories": coalesce(                        categories[]->{                            _id,                            slug,                            title                        },                    []),                    author->{                        name,                        image                    }                                    }            }        }          }}
 export type HOME_PAGE_QUERYResult = {
   homePage: null;
 } | {
@@ -974,7 +980,7 @@ export type HOME_PAGE_QUERYResult = {
     content: Array<{
       _key: string;
       _type: "featured";
-      title?: string;
+      title: string | null;
       documents: Array<{
         _id: string;
         _type: "article";
@@ -1204,6 +1210,53 @@ export type PRIMARYNAVIGATION_QUERYResult = {
     }> | null;
   } | null;
 } | null;
+// Variable: FOOTERNAVIGATION_QUERY
+// Query: *[_id == "siteSettings"][0]{        title,        image,        footerNav->{            navId,            items[]{                _key,                text,                url{                    "internalUrl": internalUrl->slug.current,                    manualUrl,                    externalUrl,                    "documentType": internalUrl->_type,                }            }        },    }
+export type FOOTERNAVIGATION_QUERYResult = {
+  title: string | null;
+  image: null;
+  footerNav: null;
+} | {
+  title: null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  footerNav: null;
+} | {
+  title: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  footerNav: {
+    navId: Slug | null;
+    items: Array<{
+      _key: string;
+      text: string | null;
+      url: {
+        internalUrl: string | null;
+        manualUrl: string | null;
+        externalUrl: string | null;
+        documentType: "article" | "page" | "project" | null;
+      } | null;
+    }> | null;
+  } | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1214,7 +1267,8 @@ declare module "@sanity/client" {
     "\n*[_type == \"article\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLES_QUERYResult;
     "\n*[_type == \"article\" && slug.current == $slug][0]{\n    _id,\n    title,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLE_QUERYResult;
     "\n*[_type == \"page\" && slug.current == $slug][0]{\n    ...,\n    content[]{\n        ...,\n        video {\n        'url': asset->url,\n        },\n        url{\n            \"internalUrl\": internalUrl->slug.current,\n            manualUrl,\n            externalUrl,\n            \"documentType\": internalUrl->_type,\n        },\n        linkText\n    }\n}\n": PAGE_QUERYResult;
-    "\n*[_id == \"siteSettings\"][0]{\n    homePage->{\n        ...,\n        content[]{\n            ...,\n            _type == 'hero' => {\n                video {\n                    'url': asset->url,\n                },\n                url{\n                    \"internalUrl\": internalUrl->slug.current,\n                    manualUrl,\n                    externalUrl,\n                    \"documentType\": internalUrl->_type,\n                },\n                linkText,\n            },\n            _type == 'featured' => {\n                documents[]->{\n                    _id,\n                    _type,\n                    title,\n                    slug,\n                    mainImage,\n                    \"categories\": coalesce(\n                        categories[]->{\n                            _id,\n                            slug,\n                            title\n                        },\n                    []),\n                    author->{\n                        name,\n                        image\n                    }                    \n                }\n            }\n        }      \n    }\n}\n": HOME_PAGE_QUERYResult;
+    "\n*[_id == \"siteSettings\"][0]{\n    homePage->{\n        ...,\n        content[]{\n            ...,\n            _type == 'hero' => {\n                video {\n                    'url': asset->url,\n                },\n                url{\n                    \"internalUrl\": internalUrl->slug.current,\n                    manualUrl,\n                    externalUrl,\n                    \"documentType\": internalUrl->_type,\n                },\n                linkText,\n            },\n            _type == 'featured' => {\n                title,\n                documents[]->{\n                    _id,\n                    _type,\n                    title,\n                    slug,\n                    mainImage,\n                    \"categories\": coalesce(\n                        categories[]->{\n                            _id,\n                            slug,\n                            title\n                        },\n                    []),\n                    author->{\n                        name,\n                        image\n                    }                    \n                }\n            }\n        }      \n    }\n}\n": HOME_PAGE_QUERYResult;
     "\n*[_id == \"siteSettings\"][0]{\n    title,\n    image,\n    primaryNav->{\n        navId,\n        items[]{\n            _key,\n            text,\n            url{\n                \"internalUrl\": internalUrl->slug.current,\n                manualUrl,\n                externalUrl,\n                \"documentType\": internalUrl->_type,\n            }\n        }\n    },\n}\n": PRIMARYNAVIGATION_QUERYResult;
+    "\n    *[_id == \"siteSettings\"][0]{\n        title,\n        image,\n        footerNav->{\n            navId,\n            items[]{\n                _key,\n                text,\n                url{\n                    \"internalUrl\": internalUrl->slug.current,\n                    manualUrl,\n                    externalUrl,\n                    \"documentType\": internalUrl->_type,\n                }\n            }\n        },\n    }\n    ": FOOTERNAVIGATION_QUERYResult;
   }
 }

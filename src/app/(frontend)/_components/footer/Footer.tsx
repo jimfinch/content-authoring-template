@@ -1,3 +1,5 @@
+import { FooterLinks } from "./FooterLinks"
+
 export default function Footer({
 	children,
 	className,
@@ -8,7 +10,7 @@ export default function Footer({
 }) {
 	return (
 		<footer className={className} {...props}>
-			Footer Content
+			<FooterLinks />
 		</footer>
 	)
 }

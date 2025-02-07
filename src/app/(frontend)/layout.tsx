@@ -22,7 +22,7 @@ export default function RootLayout({
 				<Menu>{children}</Menu>
 			</Header>
 			<Template>{children}</Template>
-			<Footer>{children}</Footer>
+			<Footer className="px-10 py-24">{children}</Footer>
 
 			<SanityLive />
 		</>

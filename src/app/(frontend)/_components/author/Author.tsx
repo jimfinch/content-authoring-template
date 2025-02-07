@@ -8,18 +8,18 @@ type AuthorProps = {
 
 export function Author({ author }: AuthorProps) {
 	return author?.image || author?.name ? (
-		<div className="flex gap-3 items-center my-6">
+		<div className="flex gap-3 items-center mt-4 mb-6">
 			{author?.image ? (
 				<Image
 					src={urlFor(author.image).width(30).height(30).url()}
 					width={30}
 					height={30}
 					alt={author.name || ""}
-					className="rounded-full border-2 border-neutral-700"
+					className="rounded-full"
 				/>
 			) : null}
 			{author?.name ? (
-				<p className="text-neutral-400 font-bold">{author.name}</p>
+				<p className="text-neutral-500 font-bold">{author.name}</p>
 			) : null}
 		</div>
 	) : null

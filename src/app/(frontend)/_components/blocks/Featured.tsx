@@ -7,7 +7,7 @@ import Link from "next/link"
 import { Categories } from "../categories/Categories"
 import { Author } from "../author/Author"
 import { PublishedAt } from "../published/Published"
-import HandleSlug from "../_utils/handleSlug"
+import HandleSlug from "../_utils/HandleSlug"
 import { motion } from "motion/react"
 
 type Statment = Extract<
@@ -17,28 +17,58 @@ type Statment = Extract<
 	documents: Array<{
 		_id?: string
 		categories: Array<{ title: string }>
-		mainImage?: { alt?: string }
+		mainImage?: { alt?: string; asset: { _ref: string } }
 		title?: string
 		_type?: string
 		author?: string
 		publishedAt?: string
+		slug: { current: string }
 	}>
 }
 
 export function Featured({ title, documents }: Statment) {
-	console.log(documents)
+	const fadeInUp = {
+		initial: { y: "48px", opacity: 0 },
+		animate: { y: "0", opacity: 1 },
+		exit: { y: "48px", opacity: 0 },
+	}
+
+	const slideFromLeft = {
+		initial: { marginLeft: "-60px" },
+		animate: { marginLeft: "0px" },
+		exit: { marginLeft: "-60px" },
+	}
+
 	return (
 		<section className="mx-auto py-24">
 			{title ? (
 				<div className="pb-7 mb-20 border-b border-solid border-b-neutral-800">
-					<h3 className="container mx-auto text-4xl">{title}</h3>
+					<div className="container mx-auto ">
+						<motion.h3
+							variants={slideFromLeft}
+							transition={{ duration: 0.75 }}
+							initial="initial"
+							whileInView="animate"
+							exit="exit"
+							className="text-4xl"
+						>
+							{title}
+						</motion.h3>
+					</div>
 				</div>
 			) : null}
 			<div className="container mx-auto grid grid-cols-3 gap-x-20 gap-y-20">
 				{documents &&
 					documents.map((document) => (
 						<Link key={document._id} href={HandleSlug(document)}>
-							<motion.article className="w-full">
+							<motion.article
+								variants={fadeInUp}
+								transition={{ duration: 0.75 }}
+								initial="initial"
+								whileInView="animate"
+								exit="exit"
+								className="w-full"
+							>
 								{document.mainImage ? (
 									<Image
 										src={urlFor(document.mainImage)

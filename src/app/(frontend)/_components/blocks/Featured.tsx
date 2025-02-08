@@ -1,6 +1,5 @@
 "use client"
 
-import { PAGE_QUERYResult } from "@/sanity/types"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import Link from "next/link"
@@ -10,23 +9,27 @@ import { PublishedAt } from "../published/Published"
 import HandleSlug from "../_utils/HandleSlug"
 import { motion } from "motion/react"
 
-type Statment = Extract<
-	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
-	{ _type: "featured" }
-> & {
-	documents: Array<{
-		_id?: string
-		categories: Array<{ title: string }>
-		mainImage?: { alt?: string; asset: { _ref: string } }
-		title?: string
-		_type?: string
-		author?: string
-		publishedAt?: string
-		slug: { current: string }
-	}>
+type Document = {
+	_id: string
+	mainImage?: {
+		alt?: string
+	}
+	title?: string
+	_type: string
+	author?: any
+	publishedAt?: string
+	categories?: any[]
+	slug: {
+		current: string
+	}
 }
 
-export function Featured({ title, documents }: Statment) {
+type Statement = {
+	title?: string
+	documents: Document[]
+}
+
+export function Featured({ title, documents }: Statement) {
 	const fadeInUp = {
 		initial: { y: "48px", opacity: 0 },
 		animate: { y: "0", opacity: 1 },
@@ -96,7 +99,7 @@ export function Featured({ title, documents }: Statment) {
 											<Author author={document.author} />
 											<PublishedAt
 												publishedAt={
-													document.publishedAt
+													document.publishedAt || null
 												}
 											/>
 										</div>
@@ -104,9 +107,11 @@ export function Featured({ title, documents }: Statment) {
 								</div>
 
 								<div className="flex gap-4 mt-4">
-									<Categories
-										categories={document.categories}
-									/>
+									{document.categories && (
+										<Categories
+											categories={document.categories}
+										/>
+									)}
 								</div>
 							</motion.article>
 						</Link>

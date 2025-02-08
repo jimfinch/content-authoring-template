@@ -5,18 +5,18 @@ import { NavLinks } from "./NavLinks"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 
-export async function Menu({ children }) {
+export async function Nav() {
 	const { data: nav } = await sanityFetch({
 		query: PRIMARYNAVIGATION_QUERY,
 	})
 
-	const items = nav.primaryNav.items
-	const logo = nav.image
-	const title = nav.title
+	const items = nav?.primaryNav?.items ?? []
+	const logo = nav?.image
+	const title = nav?.title
 
 	return (
 		<nav className="flex w-full justify-between items-center">
-			<div className="flex overflow-hidden h-max w-fit">
+			<div className="flex overflow-hidden h-max w-full">
 				<Link
 					href="/"
 					className="px-5 py-2 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
@@ -26,7 +26,7 @@ export async function Menu({ children }) {
 							src={urlFor(logo).url()}
 							width={100}
 							height={42}
-							alt={logo.alt || title}
+							alt={logo?.alt || title}
 						/>
 					) : (
 						<h2>{title}</h2>
@@ -34,9 +34,9 @@ export async function Menu({ children }) {
 				</Link>
 			</div>
 
-			<NavLinks items={items}>{children}</NavLinks>
+			<NavLinks items={items} />
 
-			<div className="flex overflow-hidden h-max w-fit justify-end">
+			<div className="flex overflow-hidden h-max w-full justify-end">
 				<Link
 					href="/"
 					className="px-5 py-2 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"

@@ -12,28 +12,34 @@ export function Article(props: NonNullable<ARTICLE_QUERYResult>) {
 	const { title, author, mainImage, body, publishedAt, categories } = props
 
 	return (
-		<article className="">
-			<header className="">
-				<div className="">
-					<Categories categories={categories} />
+		<article>
+			<header className="container mx-auto">
+				<Title className="mb-12 text-center">{title}</Title>
+				<div className="flex flex-row items-center justify-center mb-12">
+					<Author author={author} />
+					<span className="text-neutral-500 font-bold">,&nbsp;</span>
 					<PublishedAt publishedAt={publishedAt} />
 				</div>
-				<Title>{title}</Title>
-				<Author author={author} />
 			</header>
 			{mainImage ? (
-				<figure className="">
+				<figure>
 					<Image
-						src={urlFor(mainImage).width(400).height(400).url()}
-						width={400}
-						height={400}
+						priority
+						src={urlFor(mainImage).width(1920).height(1080).url()}
+						width={1920}
+						height={1080}
 						alt={mainImage.alt || title || ""}
+						className="w-full object-cover"
 					/>
 				</figure>
 			) : null}
 			{body ? (
-				<div className="">
+				<div className="container mx-auto prose prose-invert lg:prose-lg mt-24">
 					<PortableText value={body} components={components} />
+
+					<div className="flex gap-4 my-24">
+						<Categories categories={categories} />
+					</div>
 				</div>
 			) : null}
 		</article>

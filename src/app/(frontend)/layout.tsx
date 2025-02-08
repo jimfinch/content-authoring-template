@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import "@/app/globals.css"
 import Footer from "@/app/(frontend)/_components/footer/Footer"
 import Header from "@/app/(frontend)/_components/header/Header"
-import { Menu } from "./_components/menu/Menu"
+import { Nav } from "./_components/nav/Nav"
 import Template from "./template"
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({
 	return (
 		<>
 			<Header className="fixed top-0 z-10 flex w-full items-center justify-between px-10 py-6">
-				<Menu>{children}</Menu>
+				<Nav />
 			</Header>
 			<Template>{children}</Template>
 			<Footer className="px-10 py-24">{children}</Footer>

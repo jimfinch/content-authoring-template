@@ -18,7 +18,7 @@ export default async function Page({
 	}
 
 	return (
-		<main>
+		<main className="py-40">
 			<Project {...project} />
 		</main>
 	)

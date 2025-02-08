@@ -7,13 +7,13 @@ import HandleUrl from "../_utils/HandleUrl"
 
 interface NavItem {
 	_key: string
+	text: string | null
 	url: {
-		documentType: string
-		internalUrl?: string
-		manualUrl?: string
-		externalUrl?: string
-	}
-	text: string
+		documentType: "article" | "page" | "project" | null
+		internalUrl?: string | null
+		manualUrl?: string | null
+		externalUrl?: string | null
+	} | null
 }
 
 interface NavLinksProps {
@@ -84,7 +84,7 @@ export function NavLinks({ items }: NavLinksProps) {
 					opacity: 0,
 				}))
 			}
-			className="relative flex w-fit gap-2 rounded-full bg-neutral-700 bg-opacity-20 py-2 px-3 backdrop-blur-xl"
+			className="relative flex w-fit gap-2 rounded-full bg-neutral-700 bg-opacity-40 py-2 px-3 backdrop-blur-xl"
 		>
 			{items?.map((item) => (
 				<NavListItem
@@ -92,16 +92,23 @@ export function NavLinks({ items }: NavLinksProps) {
 					key={item._key}
 					className="relative z-10 flex cursor-pointer items-center text-white mix-blend-difference"
 				>
-					{item.url.internalUrl && (
+					{item.url?.internalUrl && (
 						<Link
-							href={HandleUrl(item.url)}
+							href={
+								item.url?.documentType && item.url?.internalUrl
+									? HandleUrl({
+											documentType: item.url.documentType,
+											internalUrl: item.url.internalUrl,
+										})
+									: "#"
+							}
 							className="rounded-full bg-opacity-50 px-5 py-2 transition duration-300 ease-in-out font-bold"
 						>
 							{item.text}
 						</Link>
 					)}
 
-					{item.url.manualUrl && (
+					{item.url?.manualUrl && (
 						<Link
 							href={item.url.manualUrl}
 							className="rounded-full bg-opacity-50 px-5 py-2 transition duration-300 ease-in-out font-bold"
@@ -110,7 +117,7 @@ export function NavLinks({ items }: NavLinksProps) {
 						</Link>
 					)}
 
-					{item.url.externalUrl && (
+					{item.url?.externalUrl && (
 						<Link
 							href={item.url.externalUrl}
 							rel="noopener noreferrer"

@@ -16,7 +16,14 @@ type HeroProps = Extract<
 	{
 		_type: "hero"
 	}
->
+> & {
+	title: string
+	text: string
+	image: object
+	video: object
+	linkText: string
+	url: string
+}
 
 export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 	// Motion config
@@ -107,6 +114,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 				</motion.div>
 			) : (
 				<Image
+					priority
 					className="absolute inset-0 object-cover blur-sm w-full h-auto"
 					src={urlFor(image).width(1600).height(800).url()}
 					width={1600}

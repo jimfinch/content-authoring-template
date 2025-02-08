@@ -36,7 +36,7 @@ export function ProjectCard(props: PROJECT_QUERYResult[0]) {
 					/>
 				) : null}
 				<h2 className="text-2xl mt-3">{title}</h2>
-				<div className="flex gap-4 mt-4">
+				<div className="flex flex-wrap gap-4 mt-4">
 					{categories && <Categories categories={categories} />}
 				</div>
 			</motion.article>

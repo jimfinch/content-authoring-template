@@ -58,7 +58,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 							whileInView="animate"
 							exit="exit"
 						>
-							<Title className="text-4xl sm:text-6xl lg:text-8xl text-left font-bold">
+							<Title className="text-5xl leading-normal sm:text-6xl sm:leading-snug lg:text-8xl xl:leading-tight text-left font-bold">
 								{title}
 							</Title>
 						</motion.div>

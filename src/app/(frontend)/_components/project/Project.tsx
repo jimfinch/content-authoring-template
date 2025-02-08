@@ -32,7 +32,7 @@ export function Project(props: NonNullable<PROJECT_QUERYResult>) {
 				<div className="container mx-auto prose prose-invert lg:prose-lg mt-24">
 					<PortableText value={body} components={components} />
 
-					<div className="flex gap-4 my-24">
+					<div className="flex flex-wrap gap-4 my-24">
 						<Categories categories={categories} />
 					</div>
 				</div>

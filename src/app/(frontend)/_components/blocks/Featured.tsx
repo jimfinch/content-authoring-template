@@ -43,10 +43,10 @@ export function Featured({ title, documents }: Statement) {
 	}
 
 	return (
-		<section className="mx-auto py-24">
+		<section className="py-12 md:py-24">
 			{title ? (
-				<div className="pb-7 mb-20 border-b border-solid border-b-neutral-800">
-					<div className="container mx-auto ">
+				<div className="pb-7 mb-12 md:mb-20 border-b border-solid border-b-neutral-800">
+					<div className="container mx-auto px-6">
 						<motion.h3
 							variants={slideFromLeft}
 							transition={{ duration: 0.75 }}
@@ -60,7 +60,7 @@ export function Featured({ title, documents }: Statement) {
 					</div>
 				</div>
 			) : null}
-			<div className="container mx-auto grid grid-cols-3 gap-x-20 gap-y-20">
+			<div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-20">
 				{documents &&
 					documents.map((document) => (
 						<Link key={document._id} href={HandleSlug(document)}>
@@ -106,7 +106,7 @@ export function Featured({ title, documents }: Statement) {
 									) : null}
 								</div>
 
-								<div className="flex gap-4 mt-4">
+								<div className="flex flex-wrap gap-4 mt-4">
 									{document.categories && (
 										<Categories
 											categories={document.categories}

@@ -26,7 +26,7 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 
 	return (
 		<section
-			className="container mx-auto flex gap-20 py-24 data-[orientation='imageRight']:flex-row-reverse"
+			className="container mx-auto flex flex-col lg:flex-row gap-12 md:gap-20 px-6 py-6 md:py-24 lg:data-[orientation='imageRight']:flex-row-reverse"
 			data-orientation={stegaClean(orientation) || "imageLeft"}
 		>
 			{image ? (
@@ -36,7 +36,7 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 					initial="initial"
 					whileInView="animate"
 					exit="exit"
-					className="w-2/3 h-auto"
+					className="w-full lg:w-2/3 h-auto"
 				>
 					<Image
 						className="rounded-md w-full h-auto"
@@ -53,10 +53,10 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 				initial="initial"
 				whileInView="animate"
 				exit="exit"
-				className="w-1/3 flex items-start"
+				className="w-full lg:w-1/3 flex items-start"
 			>
 				{title ? (
-					<h2 className="sticky top-20 text-2xl leading-normal sm:text-3xl sm:leading-snug lg:text-4xl lg:leading-tight text-pretty">
+					<h2 className="sticky top-20 prose-lg leading-normal sm:text-3xl sm:leading-snug lg:text-3xl xl:text-4xl xl:leading-tight text-pretty">
 						{title}
 					</h2>
 				) : null}

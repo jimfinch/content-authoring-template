@@ -1,9 +1,10 @@
 import Link from "next/link"
 import { PRIMARYNAVIGATION_QUERY } from "@/sanity/lib/queries"
 import { sanityFetch } from "@/sanity/lib/live"
-import { NavLinks } from "./NavLinks"
+import { NavList } from "./NavList"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
+import { useState } from "react"
 
 export async function Nav() {
 	const { data: nav } = await sanityFetch({
@@ -19,13 +20,13 @@ export async function Nav() {
 			<div className="flex overflow-hidden h-max w-full">
 				<Link
 					href="/"
-					className="px-5 py-2 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
+					className="px-2 py-2 lg:px-5 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
 				>
 					{logo ? (
 						<Image
 							src={urlFor(logo).url()}
-							width={100}
-							height={42}
+							width={90}
+							height={25}
 							alt={logo?.alt || title}
 						/>
 					) : (
@@ -34,12 +35,12 @@ export async function Nav() {
 				</Link>
 			</div>
 
-			<NavLinks items={items} />
+			<NavList items={items} />
 
 			<div className="flex overflow-hidden h-max w-full justify-end">
 				<Link
 					href="/"
-					className="px-5 py-2 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
+					className="px-2 py-2 lg:px-5 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
 				>
 					Get in touch
 				</Link>

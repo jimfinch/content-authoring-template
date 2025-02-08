@@ -16,17 +16,17 @@ export function Statement({ text }: Statment) {
 	}
 
 	return (
-		<section className="container mx-auto flex gap-8 py-24">
+		<section className="container mx-auto flex gap-8 px-6 py-24">
 			<motion.div
 				variants={slideFadeFromBottom}
 				transition={{ duration: 1 }}
 				initial="initial"
 				whileInView="animate"
 				exit="exit"
-				className="w-2/3 flex items-center"
+				className="lg:w-2/3 flex items-center"
 			>
 				{text ? (
-					<h2 className="text-3xl leading-normal sm:text-4xl sm:leading-snug lg:text-6xl lg:leading-tight text-left mb-12">
+					<h2 className="text-4xl leading-normal sm:text-5xl sm:leading-snug lg:text-6xl lg:leading-tight text-left mb-12">
 						{text}
 					</h2>
 				) : null}

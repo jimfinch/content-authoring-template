@@ -47,7 +47,7 @@ export function ArticleCard(props: ARTICLE_QUERYResult[0]) {
 						<PublishedAt publishedAt={publishedAt} />
 					</div>
 				</div>
-				<div className="flex gap-4 mt-4">
+				<div className="flex flex-wrap gap-4 mt-4">
 					{categories && <Categories categories={categories} />}
 				</div>
 			</motion.article>

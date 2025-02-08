@@ -18,11 +18,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<>
-			<Header className="fixed top-0 z-10 flex w-full items-center justify-between px-10 py-6">
+			<Header className="fixed min-h-[82px] top-0 z-10 flex w-full items-center justify-between px-5 py-4 lg:px-8 lg:py-5">
 				<Nav />
 			</Header>
 			<Template>{children}</Template>
-			<Footer className="px-10 py-24">{children}</Footer>
+			<Footer className="px-6 py-24">{children}</Footer>
 
 			<SanityLive />
 		</>

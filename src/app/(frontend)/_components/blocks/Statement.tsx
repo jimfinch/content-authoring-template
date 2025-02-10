@@ -16,7 +16,7 @@ export function Statement({ title }: Statment) {
 	}
 
 	return (
-		<section className="container mx-auto flex gap-8 px-6 py-24">
+		<section className="container mx-auto flex gap-8 px-6 lg:px-10 py-24">
 			<motion.div
 				variants={slideFadeFromBottom}
 				transition={{ duration: 1 }}

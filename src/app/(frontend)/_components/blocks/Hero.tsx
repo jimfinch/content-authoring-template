@@ -45,7 +45,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 	return (
 		<section
 			ref={scrollRef}
-			className="isolate w-full h-screen py-16 relative overflow-hidden px-6 mb-20"
+			className="isolate w-full h-screen relative overflow-hidden py-16 px-6 lg:px-10 mb-20"
 		>
 			{/* Text content */}
 			<div className="relative container mx-auto flex justify-start items-center gap-8 h-full z-20">
@@ -58,7 +58,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 							whileInView="animate"
 							exit="exit"
 						>
-							<Title className="text-5xl leading-snug sm:text-6xl sm:leading-snug lg:text-8xl lg:leading-tight text-left font-bold">
+							<Title className="lg:w-2/3 text-5xl leading-snug sm:text-6xl sm:leading-snug lg:text-8xl lg:leading-tight text-left font-bold">
 								{title}
 							</Title>
 						</motion.div>

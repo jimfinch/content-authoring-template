@@ -46,7 +46,7 @@ export function Featured({ title, documents }: Statement) {
 		<section className="py-12 md:py-24">
 			{title ? (
 				<div className="pb-7 mb-12 md:mb-20 border-b border-solid border-b-neutral-800">
-					<div className="container mx-auto px-6">
+					<div className="container mx-auto px-6 lg:px-10">
 						<motion.h3
 							variants={slideFromLeft}
 							transition={{ duration: 0.75 }}
@@ -60,7 +60,7 @@ export function Featured({ title, documents }: Statement) {
 					</div>
 				</div>
 			) : null}
-			<div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-20">
+			<div className="container mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-20">
 				{documents &&
 					documents.map((document) => (
 						<Link key={document._id} href={HandleSlug(document)}>

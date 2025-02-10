@@ -1,9 +1,7 @@
-import { Author } from "@/app/(frontend)/_components/author/Author"
+import { PROJECT_QUERYResult } from "@/sanity/types"
 import { Categories } from "@/app/(frontend)/_components/categories/Categories"
 import { components } from "@/sanity/portableTextComponents"
 import { PortableText } from "next-sanity"
-import { PROJECT_QUERYResult } from "@/sanity/types"
-import { PublishedAt } from "@/app/(frontend)/_components/published/Published"
 import { Title } from "@/app/(frontend)/_components/title/Title"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
@@ -13,7 +11,7 @@ export function Project(props: NonNullable<PROJECT_QUERYResult>) {
 
 	return (
 		<article>
-			<header className="container mx-auto">
+			<header className="container mx-auto px-6">
 				<Title className="mb-12 text-center">{title}</Title>
 			</header>
 			{mainImage ? (
@@ -29,10 +27,10 @@ export function Project(props: NonNullable<PROJECT_QUERYResult>) {
 				</figure>
 			) : null}
 			{body ? (
-				<div className="container mx-auto prose prose-invert lg:prose-lg mt-24">
+				<div className="container mx-auto prose prose-invert lg:prose-lg mt-24 px-6">
 					<PortableText value={body} components={components} />
 
-					<div className="flex flex-wrap gap-4 my-24">
+					<div className="flex flex-wrap gap-4 mt-24">
 						<Categories categories={categories} />
 					</div>
 				</div>

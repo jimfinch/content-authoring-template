@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect } from "react"
 import { motion } from "motion/react"
 
 export default function Template({ children }: { children: React.ReactNode }) {

@@ -2,6 +2,12 @@ import { sanityFetch } from "@/sanity/lib/live"
 import { ARTICLES_QUERY } from "@/sanity/lib/queries"
 import { ArticleCard } from "@/app/(frontend)/_components/article/ArticleCard"
 import { Title } from "@/app/(frontend)/_components/title/Title"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+	title: "Article Index - Portfolio Template",
+	description: "Next.js and Sanity.io portfolio template",
+}
 
 export default async function Page() {
 	const { data: articles } = await sanityFetch({ query: ARTICLES_QUERY })

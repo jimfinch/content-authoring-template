@@ -2,6 +2,12 @@ import { sanityFetch } from "@/sanity/lib/live"
 import { PROJECTS_QUERY } from "@/sanity/lib/queries"
 import { ProjectCard } from "@/app/(frontend)/_components/project/ProjectCard"
 import { Title } from "@/app/(frontend)/_components/title/Title"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+	title: "Project Index - Portfolio Template",
+	description: "Next.js and Sanity.io portfolio template",
+}
 
 export default async function Page() {
 	const { data: projects } = await sanityFetch({ query: PROJECTS_QUERY })

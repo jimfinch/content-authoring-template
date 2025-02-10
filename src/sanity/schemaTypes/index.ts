@@ -10,6 +10,7 @@ import { pageBuilderType } from "./pageBuilderType"
 import { heroType } from "./blocks/heroType"
 import { splitImageType } from "./blocks/splitImageType"
 import { statementType } from "./blocks/statementType"
+import { animatedTextType } from "./blocks/animatedTextType"
 import { siteSettingsType } from "./siteSettingsType"
 import { navigationType } from "./navigationType"
 import { navigationItemType } from "./objects/navigationItemType"
@@ -33,5 +34,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		navigationItemType,
 		linkType,
 		featuredType,
+		animatedTextType,
 	],
 }

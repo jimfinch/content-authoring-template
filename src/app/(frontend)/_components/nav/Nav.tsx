@@ -4,7 +4,6 @@ import { sanityFetch } from "@/sanity/lib/live"
 import { NavList } from "./NavList"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
-import { useState } from "react"
 
 export async function Nav() {
 	const { data: nav } = await sanityFetch({
@@ -24,10 +23,12 @@ export async function Nav() {
 				>
 					{logo ? (
 						<Image
+							priority
 							src={urlFor(logo).url()}
 							width={90}
 							height={25}
 							alt={logo?.alt || title}
+							style={{ height: "auto" }}
 						/>
 					) : (
 						<h2>{title}</h2>

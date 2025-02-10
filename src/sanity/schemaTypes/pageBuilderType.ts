@@ -8,5 +8,6 @@ export const pageBuilderType = defineType({
 		defineArrayMember({ type: "splitImage" }),
 		defineArrayMember({ type: "statement" }),
 		defineArrayMember({ type: "featured" }),
+		defineArrayMember({ type: "animatedText" }),
 	],
 })

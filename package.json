@@ -16,12 +16,14 @@
 		"@sanity/image-url": "^1.1.0",
 		"@sanity/vision": "^3.74.0",
 		"dayjs": "^1.11.13",
+		"gsap": "^3.12.7",
 		"motion": "^12.3.1",
 		"next": "15.1.6",
 		"next-sanity": "^9.8.49",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"sanity": "^3.74.0",
+		"sanity-plugin-media": "^2.3.2",
 		"styled-components": "^6.1.14"
 	},
 	"devDependencies": {

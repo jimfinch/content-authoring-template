@@ -85,7 +85,7 @@ export function NavList({ items }: NavLinksProps) {
 			transition={{
 				duration: 0.1,
 			}}
-			className={`flex gap-2 rounded-full bg-neutral-700 bg-opacity-40 backdrop-blur-xl ${isOpen ? "flex-col-reverse fixed top-4 right-4 bottom-4 left-4 rounded-lg py-8 px-6 justify-between" : "py-2 px-3"}`}
+			className={`flex gap-2 rounded-full bg-neutral-700 bg-opacity-40 backdrop-blur-xl ${isOpen ? "flex-col-reverse fixed top-4 right-4 bottom-4 left-4 rounded-lg py-8 px-6 justify-end" : "py-2 px-3"}`}
 		>
 			<motion.ul
 				layout

@@ -40,9 +40,9 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 				>
 					<Image
 						className="rounded-md w-full h-auto"
-						src={urlFor(image).width(800).height(500).url()}
-						width={800}
-						height={500}
+						src={urlFor(image).width(1024).height(768).url()}
+						width={1024}
+						height={768}
 						alt={image.alt || title || ""}
 					/>
 				</motion.div>

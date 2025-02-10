@@ -8,7 +8,7 @@ type Statment = Extract<
 	{ _type: "statement" }
 >
 
-export function Statement({ text }: Statment) {
+export function Statement({ title }: Statment) {
 	const slideFadeFromBottom = {
 		initial: { x: "-48px", opacity: 0 },
 		animate: { x: "0px", opacity: 1 },
@@ -25,9 +25,9 @@ export function Statement({ text }: Statment) {
 				exit="exit"
 				className="lg:w-2/3 flex items-center"
 			>
-				{text ? (
+				{title ? (
 					<h2 className="text-4xl leading-normal sm:text-5xl sm:leading-snug lg:text-6xl lg:leading-tight text-left mb-12">
-						{text}
+						{title}
 					</h2>
 				) : null}
 			</motion.div>

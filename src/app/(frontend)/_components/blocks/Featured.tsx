@@ -70,23 +70,25 @@ export function Featured({ title, documents }: Statement) {
 								initial="initial"
 								whileInView="animate"
 								exit="exit"
-								className="w-full"
+								className="group w-full"
 							>
 								{document.mainImage ? (
-									<Image
-										src={urlFor(document.mainImage)
-											.width(400)
-											.height(460)
-											.url()}
-										width={400}
-										height={460}
-										alt={
-											document.mainImage.alt ||
-											document.title ||
-											""
-										}
-										className="rounded-md w-full h-auto"
-									/>
+									<div className="rounded-md overflow-hidden">
+										<Image
+											src={urlFor(document.mainImage)
+												.width(500)
+												.height(600)
+												.url()}
+											width={500}
+											height={600}
+											alt={
+												document.mainImage.alt ||
+												document.title ||
+												""
+											}
+											className="w-full h-auto transition-all duration-500 group-hover:scale-110"
+										/>
+									</div>
 								) : null}
 								<div>
 									<h2 className="text-2xl mt-3">
@@ -96,7 +98,10 @@ export function Featured({ title, documents }: Statement) {
 									{/* Render author if matches article type */}
 									{document._type == "article" ? (
 										<div>
-											<Author author={document.author} />
+											<Author
+												className="mt-3 mb-4"
+												author={document.author}
+											/>
 											<PublishedAt
 												publishedAt={
 													document.publishedAt || null

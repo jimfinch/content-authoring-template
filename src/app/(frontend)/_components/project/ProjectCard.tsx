@@ -24,16 +24,18 @@ export function ProjectCard(props: PROJECT_QUERYResult[0]) {
 				initial="initial"
 				whileInView="animate"
 				exit="exit"
-				className="w-full"
+				className="group w-full"
 			>
 				{mainImage ? (
-					<Image
-						src={urlFor(mainImage).width(400).height(460).url()}
-						width={400}
-						height={460}
-						alt={mainImage.alt || title || ""}
-						className="rounded-md w-full h-auto"
-					/>
+					<div className="rounded-md overflow-hidden">
+						<Image
+							src={urlFor(mainImage).width(500).height(600).url()}
+							width={500}
+							height={600}
+							alt={mainImage.alt || title || ""}
+							className="rounded-md w-full h-auto transition-all duration-500 group-hover:scale-110"
+						/>
+					</div>
 				) : null}
 				<h2 className="text-2xl mt-3">{title}</h2>
 				<div className="flex flex-wrap gap-4 mt-4">

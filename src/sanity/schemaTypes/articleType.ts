@@ -8,6 +8,7 @@ export const articleType = defineType({
 	icon: DocumentTextIcon,
 	fields: [
 		defineField({
+			title: "Article Title",
 			name: "title",
 			type: "string",
 		}),
@@ -17,6 +18,16 @@ export const articleType = defineType({
 			options: {
 				source: "title",
 			},
+		}),
+		defineField({
+			title: "SEO Title",
+			name: "seoTitle",
+			type: "string",
+		}),
+		defineField({
+			title: "SEO Description",
+			name: "seoDescription",
+			type: "string",
 		}),
 		defineField({
 			name: "author",
@@ -31,9 +42,9 @@ export const articleType = defineType({
 			},
 			fields: [
 				defineField({
+					title: "Alternative text",
 					name: "alt",
 					type: "string",
-					title: "Alternative text",
 					validation: (rule) =>
 						rule.custom((value, context) => {
 							const parent = context?.parent as {

@@ -8,6 +8,7 @@ export const projectType = defineType({
 	icon: DocumentTextIcon,
 	fields: [
 		defineField({
+			title: "Project Title",
 			name: "title",
 			type: "string",
 		}),
@@ -17,6 +18,16 @@ export const projectType = defineType({
 			options: {
 				source: "title",
 			},
+		}),
+		defineField({
+			title: "SEO Title",
+			name: "seoTitle",
+			type: "string",
+		}),
+		defineField({
+			title: "SEO Description",
+			name: "seoDescription",
+			type: "string",
 		}),
 		defineField({
 			name: "author",

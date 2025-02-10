@@ -10,27 +10,35 @@ export default function Header({
 	className?: string
 	children: React.ReactNode
 }) {
-	const [position, setPosition] = useState(0)
-	const [visible, setVisible] = useState(true)
+	const [show, setShow] = useState(true)
+	const [lastScrollY, setLastScrollY] = useState(0)
+
+	const scrollDirection = () => {
+		if (window.scrollY > lastScrollY) {
+			// If scroll down add down class
+			setShow(false)
+		} else {
+			// If scroll up add up class
+			setShow(true)
+		}
+
+		// Remember current page scroll position to compare with new scroll position
+		setLastScrollY(window.scrollY)
+	}
 
 	useEffect(() => {
-		if (typeof window !== "undefined") {
-			setPosition(window.pageYOffset)
+		window.addEventListener("scroll", scrollDirection)
 
-			const handleScroll = () => {
-				let moving = window.pageYOffset
-				setVisible(position > moving)
-				setPosition(moving)
-			}
-
-			window.addEventListener("scroll", handleScroll)
-			return () => window.removeEventListener("scroll", handleScroll)
+		// Cleanup function
+		return () => {
+			window.removeEventListener("scroll", scrollDirection)
 		}
-	}, [position])
+	}, [lastScrollY])
 
-	const cls = visible ? "up" : "down"
+	const scrollClass = show ? "up" : "down"
+
 	return (
-		<header className={`group ${cls} ${className}`} {...props}>
+		<header className={`group ${scrollClass} ${className}`} {...props}>
 			{children}
 		</header>
 	)

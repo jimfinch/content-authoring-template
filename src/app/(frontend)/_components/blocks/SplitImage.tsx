@@ -26,7 +26,7 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 
 	return (
 		<section
-			className="container mx-auto flex flex-col lg:flex-row gap-12 md:gap-20 px-6 py-6 md:py-24 lg:data-[orientation='imageRight']:flex-row-reverse"
+			className="container mx-auto flex flex-col lg:flex-row gap-12 md:gap-20 px-6 lg:px-10 py-6 md:py-24 lg:data-[orientation='imageRight']:flex-row-reverse"
 			data-orientation={stegaClean(orientation) || "imageLeft"}
 		>
 			{image ? (

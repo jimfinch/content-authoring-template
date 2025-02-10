@@ -7,7 +7,7 @@ export const components: PortableTextComponents = {
 		image: (props) =>
 			props.value ? (
 				<Image
-					className="rounded-lg not-prose w-full h-auto"
+					className="rounded-lg not-prose w-full h-auto my-12"
 					src={urlFor(props.value)
 						.width(600)
 						.height(400)
@@ -19,5 +19,11 @@ export const components: PortableTextComponents = {
 					height="400"
 				/>
 			) : null,
+	},
+	block: {
+		normal: ({ children }) => {
+			// Check prose css as this class is being overwritten
+			return <p className="mb-10">{children}</p>
+		},
 	},
 }

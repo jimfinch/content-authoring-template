@@ -6,27 +6,36 @@ import { Title } from "@/app/(frontend)/_components/title/Title"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 
-export function Project(props: NonNullable<PROJECT_QUERYResult>) {
-	const { title, mainImage, body, categories } = props
+interface ProjectProps extends NonNullable<PROJECT_QUERYResult> {}
+
+export function Project({ title, mainImage, body, categories }: ProjectProps) {
+	const imageWidth = 1920
+	const imageHeight = 1080
+	const imageAlt = mainImage?.alt || title || ""
 
 	return (
 		<article>
 			<header className="container mx-auto px-6">
 				<Title className="mb-12 text-center">{title}</Title>
 			</header>
-			{mainImage ? (
+
+			{mainImage && (
 				<figure>
 					<Image
 						priority
-						src={urlFor(mainImage).width(1920).height(1080).url()}
-						width={1920}
-						height={1080}
-						alt={mainImage.alt || title || ""}
+						src={urlFor(mainImage)
+							.width(imageWidth)
+							.height(imageHeight)
+							.url()}
+						width={imageWidth}
+						height={imageHeight}
+						alt={imageAlt}
 						className="w-full"
 					/>
 				</figure>
-			) : null}
-			{body ? (
+			)}
+
+			{body && (
 				<div className="container mx-auto prose prose-invert lg:prose-lg mt-24 px-6">
 					<PortableText value={body} components={components} />
 
@@ -34,7 +43,7 @@ export function Project(props: NonNullable<PROJECT_QUERYResult>) {
 						<Categories categories={categories} />
 					</div>
 				</div>
-			) : null}
+			)}
 		</article>
 	)
 }

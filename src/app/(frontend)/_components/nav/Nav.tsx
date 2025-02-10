@@ -19,7 +19,7 @@ export async function Nav() {
 			<div className="flex overflow-hidden h-max w-full">
 				<Link
 					href="/"
-					className="px-2 py-2 lg:px-5 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
+					className="px-2 py-2 lg:px-4 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
 				>
 					{logo ? (
 						<Image
@@ -41,7 +41,7 @@ export async function Nav() {
 			<div className="flex overflow-hidden h-max w-full justify-end">
 				<Link
 					href="/"
-					className="px-2 py-2 lg:px-5 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
+					className="px-2 py-2 lg:px-4 transition-opacity duration-300 ease-in-out font-bold group-[.down]:opacity-0"
 				>
 					Get in touch
 				</Link>

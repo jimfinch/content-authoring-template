@@ -20,7 +20,8 @@ export async function generateMetadata({
 	const { data: project } = await getPage(params)
 
 	return {
-		title: project.title,
+		title: project?.seoTitle,
+		description: project?.seoDescription,
 	}
 }
 

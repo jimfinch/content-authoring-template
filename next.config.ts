@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+	async redirects() {
+		return [
+			// Basic redirect
+			{
+				source: "/homepage",
+				destination: "/",
+				permanent: true,
+			},
+		]
+	},
 }
 
 export default nextConfig

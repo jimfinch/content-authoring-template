@@ -25,4 +25,15 @@ export const featuredType = defineType({
 			],
 		}),
 	],
+	preview: {
+		select: {
+			title: "title",
+		},
+		prepare({ title }) {
+			return {
+				title,
+				subtitle: "Featured document",
+			}
+		},
+	},
 })

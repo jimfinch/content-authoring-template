@@ -2,6 +2,7 @@ import { Hero } from "@/app/(frontend)/_components/blocks/Hero"
 import { SplitImage } from "@/app/(frontend)/_components/blocks/SplitImage"
 import { Statement } from "@/app/(frontend)/_components/blocks/Statement"
 import { Featured } from "@/app/(frontend)/_components/blocks/Featured"
+import { AnimatedText } from "../blocks/AnimatedText"
 import { PAGE_QUERYResult } from "@/sanity/types"
 
 type PageBuilderProps = {
@@ -25,6 +26,8 @@ export function PageBuilder({ content }: PageBuilderProps) {
 						return <Statement key={block._key} {...block} />
 					case "featured":
 						return <Featured key={block._key} {...block} />
+					case "animatedText":
+						return <AnimatedText key={block._key} {...block} />
 					default:
 						// This is a fallback for when we don't have a block type
 						return (

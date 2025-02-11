@@ -2,23 +2,36 @@ import { sanityFetch } from "@/sanity/lib/live"
 import { ARTICLE_QUERY } from "@/sanity/lib/queries"
 import { Article } from "@/app/(frontend)/_components/article/Article"
 import { notFound } from "next/navigation"
+import { Metadata } from "next"
 
-export default async function Page({
-	params,
-}: {
+type RouteProps = {
 	params: Promise<{ slug: string }>
-}) {
-	const { data: article } = await sanityFetch({
+}
+
+const getPage = async (params: RouteProps["params"]) =>
+	sanityFetch({
 		query: ARTICLE_QUERY,
 		params: await params,
 	})
 
+export async function generateMetadata({
+	params,
+}: RouteProps): Promise<Metadata> {
+	const { data: article } = await getPage(params)
+
+	return {
+		title: article.title,
+	}
+}
+
+export default async function Page({ params }: RouteProps) {
+	const { data: article } = await getPage(params)
 	if (!article) {
 		notFound()
 	}
 
 	return (
-		<main className="container mx-auto grid grid-cols-1 gap-6 p-12">
+		<main className="pt-40">
 			<Article {...article} />
 		</main>
 	)

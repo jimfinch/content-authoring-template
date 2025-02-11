@@ -46,6 +46,11 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type AnimatedText = {
+  _type: "animatedText";
+  title?: string;
+};
+
 export type Featured = {
   _type: "featured";
   title?: string;
@@ -90,6 +95,7 @@ export type SiteSettings = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
   homePage?: {
@@ -127,7 +133,7 @@ export type Navigation = {
 
 export type Statement = {
   _type: "statement";
-  text?: string;
+  title?: string;
 };
 
 export type SplitImage = {
@@ -236,7 +242,9 @@ export type PageBuilder = Array<{
   _key: string;
 } & Statement | {
   _key: string;
-} & Featured>;
+} & Featured | {
+  _key: string;
+} & AnimatedText>;
 
 export type Page = {
   _id: string;
@@ -464,12 +472,6 @@ export type Category = {
   description?: string;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type BlockContent = Array<{
   children?: Array<{
     marks?: Array<string>;
@@ -558,7 +560,22 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Featured | NavigationItem | SiteSettings | Navigation | Statement | SplitImage | Hero | Link | PageBuilder | Page | SanityFileAsset | Project | Article | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | AnimatedText | Featured | NavigationItem | SiteSettings | Navigation | Statement | SplitImage | Hero | Link | PageBuilder | Page | SanityFileAsset | Project | Article | Author | Category | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | MediaTag | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: PROJECTS_QUERY
@@ -847,6 +864,13 @@ export type PAGE_QUERYResult = {
   slug?: Slug;
   content: Array<{
     _key: string;
+    _type: "animatedText";
+    title?: string;
+    video: null;
+    url: null;
+    linkText: null;
+  } | {
+    _key: string;
     _type: "featured";
     title?: string;
     documents?: Array<{
@@ -947,7 +971,7 @@ export type PAGE_QUERYResult = {
   } | {
     _key: string;
     _type: "statement";
-    text?: string;
+    title?: string;
     video: null;
     url: null;
     linkText: null;
@@ -978,6 +1002,10 @@ export type HOME_PAGE_QUERYResult = {
     title?: string;
     slug?: Slug;
     content: Array<{
+      _key: string;
+      _type: "animatedText";
+      title?: string;
+    } | {
       _key: string;
       _type: "featured";
       title: string | null;
@@ -1148,7 +1176,7 @@ export type HOME_PAGE_QUERYResult = {
     } | {
       _key: string;
       _type: "statement";
-      text?: string;
+      title?: string;
     }> | null;
     mainImage?: {
       asset?: {
@@ -1166,24 +1194,14 @@ export type HOME_PAGE_QUERYResult = {
 // Variable: PRIMARYNAVIGATION_QUERY
 // Query: *[_id == "siteSettings"][0]{    title,    image,    primaryNav->{        navId,        items[]{            _key,            text,            url{                "internalUrl": internalUrl->slug.current,                manualUrl,                externalUrl,                "documentType": internalUrl->_type,            }        }    },}
 export type PRIMARYNAVIGATION_QUERYResult = {
+  title: null;
+  image: null;
+  primaryNav: null;
+} | {
   title: string | null;
   image: null;
   primaryNav: null;
 } | {
-  title: null;
-  image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-  primaryNav: null;
-} | {
   title: string | null;
   image: {
     asset?: {
@@ -1194,6 +1212,7 @@ export type PRIMARYNAVIGATION_QUERYResult = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   } | null;
   primaryNav: {
@@ -1209,10 +1228,28 @@ export type PRIMARYNAVIGATION_QUERYResult = {
       } | null;
     }> | null;
   } | null;
+} | {
+  title: null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  primaryNav: null;
 } | null;
 // Variable: FOOTERNAVIGATION_QUERY
 // Query: *[_id == "siteSettings"][0]{        title,        image,        footerNav->{            navId,            items[]{                _key,                text,                url{                    "internalUrl": internalUrl->slug.current,                    manualUrl,                    externalUrl,                    "documentType": internalUrl->_type,                }            }        },    }
 export type FOOTERNAVIGATION_QUERYResult = {
+  title: null;
+  image: null;
+  footerNav: null;
+} | {
   title: string | null;
   image: null;
   footerNav: null;
@@ -1241,6 +1278,7 @@ export type FOOTERNAVIGATION_QUERYResult = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   } | null;
   footerNav: {
@@ -1262,8 +1300,8 @@ export type FOOTERNAVIGATION_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"project\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": PROJECTS_QUERYResult;
-    "*[_type == \"project\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": PROJECT_QUERYResult;
+    "\n*[_type == \"project\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}\n": PROJECTS_QUERYResult;
+    "\n*[_type == \"project\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}\n": PROJECT_QUERYResult;
     "\n*[_type == \"article\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLES_QUERYResult;
     "\n*[_type == \"article\" && slug.current == $slug][0]{\n    _id,\n    title,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLE_QUERYResult;
     "\n*[_type == \"page\" && slug.current == $slug][0]{\n    ...,\n    content[]{\n        ...,\n        video {\n        'url': asset->url,\n        },\n        url{\n            \"internalUrl\": internalUrl->slug.current,\n            manualUrl,\n            externalUrl,\n            \"documentType\": internalUrl->_type,\n        },\n        linkText\n    }\n}\n": PAGE_QUERYResult;

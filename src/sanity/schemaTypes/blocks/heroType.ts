@@ -50,4 +50,17 @@ export const heroType = defineType({
 			type: "file",
 		}),
 	],
+	preview: {
+		select: {
+			title: "title",
+			media: "image",
+		},
+		prepare({ title, media }) {
+			return {
+				title,
+				subtitle: "Hero",
+				media,
+			}
+		},
+	},
 })

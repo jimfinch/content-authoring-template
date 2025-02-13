@@ -6,7 +6,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
 	title: "Project Index - Portfolio Template",
-	description: "Next.js and Sanity.io portfolio template",
+	description: "Project Index Descripton",
 }
 
 export default async function Page() {

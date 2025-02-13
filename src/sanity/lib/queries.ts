@@ -2,46 +2,48 @@ import { defineQuery } from "next-sanity"
 
 export const PROJECTS_QUERY = defineQuery(`
 *[_type == "project" && defined(slug.current)]|order(publishedAt desc)[0...12]{
-  _id,
-  title,
-  slug,
-  body,
-  mainImage,
-  publishedAt,
-  "categories": coalesce(
+    _id,
+    title,
+    slug,
+    body,
+    mainImage,
+    publishedAt,
+    "categories": coalesce(
     categories[]->{
-      _id,
-      slug,
-      title
+        _id,
+        slug,
+        title
     },
     []
-  ),
-  author->{
+    ),
+    author->{
     name,
     image
-  }
+    }
 }
 `)
 
 export const PROJECT_QUERY = defineQuery(`
 *[_type == "project" && slug.current == $slug][0]{
-  _id,
-  title,
-  body,
-  mainImage,
-  publishedAt,
-  "categories": coalesce(
+    _id,
+    title,
+    seoTitle,
+    seoDescription,
+    body,
+    mainImage,
+    publishedAt,
+    "categories": coalesce(
     categories[]->{
-      _id,
-      slug,
-      title
+        _id,
+        slug,
+        title
     },
     []
-  ),
-  author->{
+    ),
+    author->{
     name,
     image
-  }
+    }
 }
 `)
 
@@ -71,6 +73,8 @@ export const ARTICLE_QUERY = defineQuery(`
 *[_type == "article" && slug.current == $slug][0]{
     _id,
     title,
+    seoTitle,
+    seoDescription,
     body,
     mainImage,
     publishedAt,
@@ -151,8 +155,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
 }
 `)
 
-export const PRIMARYNAVIGATION_QUERY = defineQuery(`
-*[_id == "siteSettings"][0]{
+export const PRIMARYNAVIGATION_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
     title,
     image,
     primaryNav->{

@@ -298,6 +298,8 @@ export type Project = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  seoTitle?: string;
+  seoDescription?: string;
   author?: {
     _ref: string;
     _type: "reference";
@@ -364,6 +366,8 @@ export type Article = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  seoTitle?: string;
+  seoDescription?: string;
   author?: {
     _ref: string;
     _type: "reference";
@@ -579,7 +583,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "project" && defined(slug.current)]|order(publishedAt desc)[0...12]{  _id,  title,  slug,  body,  mainImage,  publishedAt,  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
+// Query: *[_type == "project" && defined(slug.current)]|order(publishedAt desc)[0...12]{    _id,    title,    slug,    body,    mainImage,    publishedAt,    "categories": coalesce(    categories[]->{        _id,        slug,        title    },    []    ),    author->{    name,    image    }}
 export type PROJECTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -648,10 +652,12 @@ export type PROJECTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: PROJECT_QUERY
-// Query: *[_type == "project" && slug.current == $slug][0]{  _id,  title,  body,  mainImage,  publishedAt,  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
+// Query: *[_type == "project" && slug.current == $slug][0]{    _id,    title,    seoTitle,    seoDescription,    body,    mainImage,    publishedAt,    "categories": coalesce(    categories[]->{        _id,        slug,        title    },    []    ),    author->{    name,    image    }}
 export type PROJECT_QUERYResult = {
   _id: string;
   title: string | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
   body: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -785,10 +791,12 @@ export type ARTICLES_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: ARTICLE_QUERY
-// Query: *[_type == "article" && slug.current == $slug][0]{    _id,    title,    body,    mainImage,    publishedAt,    "categories": coalesce(        categories[]->{            _id,            slug,            title        },    []),    author->{        name,        image    }}
+// Query: *[_type == "article" && slug.current == $slug][0]{    _id,    title,    seoTitle,    seoDescription,    body,    mainImage,    publishedAt,    "categories": coalesce(        categories[]->{            _id,            slug,            title        },    []),    author->{        name,        image    }}
 export type ARTICLE_QUERYResult = {
   _id: string;
   title: string | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
   body: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -1300,10 +1308,10 @@ export type FOOTERNAVIGATION_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n*[_type == \"project\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}\n": PROJECTS_QUERYResult;
-    "\n*[_type == \"project\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}\n": PROJECT_QUERYResult;
+    "\n*[_type == \"project\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n    categories[]->{\n        _id,\n        slug,\n        title\n    },\n    []\n    ),\n    author->{\n    name,\n    image\n    }\n}\n": PROJECTS_QUERYResult;
+    "\n*[_type == \"project\" && slug.current == $slug][0]{\n    _id,\n    title,\n    seoTitle,\n    seoDescription,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n    categories[]->{\n        _id,\n        slug,\n        title\n    },\n    []\n    ),\n    author->{\n    name,\n    image\n    }\n}\n": PROJECT_QUERYResult;
     "\n*[_type == \"article\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n    _id,\n    title,\n    slug,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLES_QUERYResult;
-    "\n*[_type == \"article\" && slug.current == $slug][0]{\n    _id,\n    title,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLE_QUERYResult;
+    "\n*[_type == \"article\" && slug.current == $slug][0]{\n    _id,\n    title,\n    seoTitle,\n    seoDescription,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLE_QUERYResult;
     "\n*[_type == \"page\" && slug.current == $slug][0]{\n    ...,\n    content[]{\n        ...,\n        video {\n        'url': asset->url,\n        },\n        url{\n            \"internalUrl\": internalUrl->slug.current,\n            manualUrl,\n            externalUrl,\n            \"documentType\": internalUrl->_type,\n        },\n        linkText\n    }\n}\n": PAGE_QUERYResult;
     "\n*[_id == \"siteSettings\"][0]{\n    homePage->{\n        ...,\n        content[]{\n            ...,\n            _type == 'hero' => {\n                video {\n                    'url': asset->url,\n                },\n                url{\n                    \"internalUrl\": internalUrl->slug.current,\n                    manualUrl,\n                    externalUrl,\n                    \"documentType\": internalUrl->_type,\n                },\n                linkText,\n            },\n            _type == 'featured' => {\n                title,\n                documents[]->{\n                    _id,\n                    _type,\n                    title,\n                    slug,\n                    mainImage,\n                    \"categories\": coalesce(\n                        categories[]->{\n                            _id,\n                            slug,\n                            title\n                        },\n                    []),\n                    author->{\n                        name,\n                        image\n                    }                    \n                }\n            }\n        }      \n    }\n}\n": HOME_PAGE_QUERYResult;
     "\n*[_id == \"siteSettings\"][0]{\n    title,\n    image,\n    primaryNav->{\n        navId,\n        items[]{\n            _key,\n            text,\n            url{\n                \"internalUrl\": internalUrl->slug.current,\n                manualUrl,\n                externalUrl,\n                \"documentType\": internalUrl->_type,\n            }\n        }\n    },\n}\n": PRIMARYNAVIGATION_QUERYResult;

@@ -43,7 +43,7 @@ export const siteSettingsType = defineType({
 			title: "Set a homepage",
 			name: "homePage",
 			type: "reference",
-			to: [{ type: "page" }],
+			to: [{ type: "pages" }],
 		}),
 		defineField({
 			title: "Primary navigation",

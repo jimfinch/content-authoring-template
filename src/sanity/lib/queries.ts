@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity"
 
 export const PROJECTS_QUERY = defineQuery(`
-*[_type == "project" && defined(slug.current)]|order(publishedAt desc)[0...12]{
+*[_type == "projects" && defined(slug.current)]|order(publishedAt desc)[0...12]{
     _id,
     title,
     slug,
@@ -24,7 +24,7 @@ export const PROJECTS_QUERY = defineQuery(`
 `)
 
 export const PROJECT_QUERY = defineQuery(`
-*[_type == "project" && slug.current == $slug][0]{
+*[_type == "projects" && slug.current == $slug][0]{
     _id,
     title,
     seoTitle,
@@ -48,7 +48,7 @@ export const PROJECT_QUERY = defineQuery(`
 `)
 
 export const ARTICLES_QUERY = defineQuery(`
-*[_type == "article" && defined(slug.current)]|order(publishedAt desc)[0...12]{
+*[_type == "articles" && defined(slug.current)]|order(publishedAt desc)[0...12]{
     _id,
     title,
     slug,
@@ -70,7 +70,7 @@ export const ARTICLES_QUERY = defineQuery(`
 `)
 
 export const ARTICLE_QUERY = defineQuery(`
-*[_type == "article" && slug.current == $slug][0]{
+*[_type == "articles" && slug.current == $slug][0]{
     _id,
     title,
     seoTitle,
@@ -93,7 +93,7 @@ export const ARTICLE_QUERY = defineQuery(`
 `)
 
 export const PAGE_QUERY = defineQuery(`
-*[_type == "page" && slug.current == $slug][0]{
+*[_type == "pages" && slug.current == $slug][0]{
     ...,
     content[]{
         ...,

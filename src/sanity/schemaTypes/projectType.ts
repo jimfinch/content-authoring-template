@@ -2,7 +2,7 @@ import { DocumentTextIcon } from "@sanity/icons"
 import { defineArrayMember, defineField, defineType } from "sanity"
 
 export const projectType = defineType({
-	name: "project",
+	name: "projects",
 	title: "Project",
 	type: "document",
 	icon: DocumentTextIcon,

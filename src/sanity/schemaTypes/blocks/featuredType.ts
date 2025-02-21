@@ -17,9 +17,9 @@ export const featuredType = defineType({
 				{
 					type: "reference",
 					to: [
-						{ type: "project" },
-						{ type: "article" },
-						{ type: "page" },
+						{ type: "projects" },
+						{ type: "articles" },
+						{ type: "pages" },
 					],
 				},
 			],

@@ -58,17 +58,17 @@ export type Featured = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "project";
+    [internalGroqTypeReferenceTo]?: "projects";
   } | {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "article";
+    [internalGroqTypeReferenceTo]?: "articles";
   } | {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
+    [internalGroqTypeReferenceTo]?: "pages";
   }>;
 };
 
@@ -102,7 +102,7 @@ export type SiteSettings = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
+    [internalGroqTypeReferenceTo]?: "pages";
   };
   primaryNav?: {
     _ref: string;
@@ -218,17 +218,17 @@ export type Link = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "project";
+    [internalGroqTypeReferenceTo]?: "projects";
   } | {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
+    [internalGroqTypeReferenceTo]?: "pages";
   } | {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "article";
+    [internalGroqTypeReferenceTo]?: "articles";
   };
   manualUrl?: string;
   externalUrl?: string;
@@ -246,9 +246,9 @@ export type PageBuilder = Array<{
   _key: string;
 } & AnimatedText>;
 
-export type Page = {
+export type Pages = {
   _id: string;
-  _type: "page";
+  _type: "pages";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -290,9 +290,9 @@ export type SanityFileAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type Project = {
+export type Projects = {
   _id: string;
-  _type: "project";
+  _type: "projects";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -358,9 +358,9 @@ export type Project = {
   }>;
 };
 
-export type Article = {
+export type Articles = {
   _id: string;
-  _type: "article";
+  _type: "articles";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -579,423 +579,24 @@ export type Slug = {
   source?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | AnimatedText | Featured | NavigationItem | SiteSettings | Navigation | Statement | SplitImage | Hero | Link | PageBuilder | Page | SanityFileAsset | Project | Article | Author | Category | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | MediaTag | Slug;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | AnimatedText | Featured | NavigationItem | SiteSettings | Navigation | Statement | SplitImage | Hero | Link | PageBuilder | Pages | SanityFileAsset | Projects | Articles | Author | Category | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | MediaTag | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: PROJECTS_QUERY
 // Query: *[_type == "project" && defined(slug.current)]|order(publishedAt desc)[0...12]{    _id,    title,    slug,    body,    mainImage,    publishedAt,    "categories": coalesce(    categories[]->{        _id,        slug,        title    },    []    ),    author->{    name,    image    }}
-export type PROJECTS_QUERYResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }> | null;
-  mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-  publishedAt: string | null;
-  categories: Array<{
-    _id: string;
-    slug: Slug | null;
-    title: string | null;
-  }> | Array<never>;
-  author: {
-    name: string | null;
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | null;
-}>;
+export type PROJECTS_QUERYResult = Array<never>;
 // Variable: PROJECT_QUERY
 // Query: *[_type == "project" && slug.current == $slug][0]{    _id,    title,    seoTitle,    seoDescription,    body,    mainImage,    publishedAt,    "categories": coalesce(    categories[]->{        _id,        slug,        title    },    []    ),    author->{    name,    image    }}
-export type PROJECT_QUERYResult = {
-  _id: string;
-  title: string | null;
-  seoTitle: string | null;
-  seoDescription: string | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }> | null;
-  mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-  publishedAt: string | null;
-  categories: Array<{
-    _id: string;
-    slug: Slug | null;
-    title: string | null;
-  }> | Array<never>;
-  author: {
-    name: string | null;
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | null;
-} | null;
+export type PROJECT_QUERYResult = null;
 // Variable: ARTICLES_QUERY
 // Query: *[_type == "article" && defined(slug.current)]|order(publishedAt desc)[0...12]{    _id,    title,    slug,    body,    mainImage,    publishedAt,    "categories": coalesce(        categories[]->{            _id,            slug,            title        },    []),    author->{        name,        image    }}
-export type ARTICLES_QUERYResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }> | null;
-  mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-  publishedAt: string | null;
-  categories: Array<{
-    _id: string;
-    slug: Slug | null;
-    title: string | null;
-  }> | Array<never>;
-  author: {
-    name: string | null;
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | null;
-}>;
+export type ARTICLES_QUERYResult = Array<never>;
 // Variable: ARTICLE_QUERY
 // Query: *[_type == "article" && slug.current == $slug][0]{    _id,    title,    seoTitle,    seoDescription,    body,    mainImage,    publishedAt,    "categories": coalesce(        categories[]->{            _id,            slug,            title        },    []),    author->{        name,        image    }}
-export type ARTICLE_QUERYResult = {
-  _id: string;
-  title: string | null;
-  seoTitle: string | null;
-  seoDescription: string | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }> | null;
-  mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-  publishedAt: string | null;
-  categories: Array<{
-    _id: string;
-    slug: Slug | null;
-    title: string | null;
-  }> | Array<never>;
-  author: {
-    name: string | null;
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | null;
-} | null;
+export type ARTICLE_QUERYResult = null;
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0]{    ...,    content[]{        ...,        video {        'url': asset->url,        },        url{            "internalUrl": internalUrl->slug.current,            manualUrl,            externalUrl,            "documentType": internalUrl->_type,        },        linkText    }}
-export type PAGE_QUERYResult = {
-  _id: string;
-  _type: "page";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  content: Array<{
-    _key: string;
-    _type: "animatedText";
-    title?: string;
-    video: null;
-    url: null;
-    linkText: null;
-  } | {
-    _key: string;
-    _type: "featured";
-    title?: string;
-    documents?: Array<{
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "article";
-    } | {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "page";
-    } | {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "project";
-    }>;
-    video: null;
-    url: null;
-    linkText: null;
-  } | {
-    _key: string;
-    _type: "hero";
-    title?: string;
-    text?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    } | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-      _key: string;
-    }>;
-    linkText: string | null;
-    url: {
-      internalUrl: string | null;
-      manualUrl: string | null;
-      externalUrl: string | null;
-      documentType: "article" | "page" | "project" | null;
-    } | null;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    };
-    video: {
-      url: string | null;
-    } | null;
-  } | {
-    _key: string;
-    _type: "splitImage";
-    orientation?: "imageLeft" | "imageRight";
-    title?: string;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    };
-    video: null;
-    url: null;
-    linkText: null;
-  } | {
-    _key: string;
-    _type: "statement";
-    title?: string;
-    video: null;
-    url: null;
-    linkText: null;
-  }> | null;
-  mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-} | null;
+export type PAGE_QUERYResult = null;
 // Variable: HOME_PAGE_QUERY
 // Query: *[_id == "siteSettings"][0]{    homePage->{        ...,        content[]{            ...,            _type == 'hero' => {                video {                    'url': asset->url,                },                url{                    "internalUrl": internalUrl->slug.current,                    manualUrl,                    externalUrl,                    "documentType": internalUrl->_type,                },                linkText,            },            _type == 'featured' => {                title,                documents[]->{                    _id,                    _type,                    title,                    slug,                    mainImage,                    "categories": coalesce(                        categories[]->{                            _id,                            slug,                            title                        },                    []),                    author->{                        name,                        image                    }                                    }            }        }          }}
 export type HOME_PAGE_QUERYResult = {
@@ -1003,7 +604,7 @@ export type HOME_PAGE_QUERYResult = {
 } | {
   homePage: {
     _id: string;
-    _type: "page";
+    _type: "pages";
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -1019,7 +620,7 @@ export type HOME_PAGE_QUERYResult = {
       title: string | null;
       documents: Array<{
         _id: string;
-        _type: "article";
+        _type: "articles";
         title: string | null;
         slug: Slug | null;
         mainImage: {
@@ -1055,7 +656,7 @@ export type HOME_PAGE_QUERYResult = {
         } | null;
       } | {
         _id: string;
-        _type: "page";
+        _type: "pages";
         title: string | null;
         slug: Slug | null;
         mainImage: {
@@ -1073,7 +674,7 @@ export type HOME_PAGE_QUERYResult = {
         author: null;
       } | {
         _id: string;
-        _type: "project";
+        _type: "projects";
         title: string | null;
         slug: Slug | null;
         mainImage: {
@@ -1147,7 +748,7 @@ export type HOME_PAGE_QUERYResult = {
         internalUrl: string | null;
         manualUrl: string | null;
         externalUrl: string | null;
-        documentType: "article" | "page" | "project" | null;
+        documentType: "articles" | "pages" | "projects" | null;
       } | null;
       image?: {
         asset?: {
@@ -1232,7 +833,7 @@ export type PRIMARYNAVIGATION_QUERYResult = {
         internalUrl: string | null;
         manualUrl: string | null;
         externalUrl: string | null;
-        documentType: "article" | "page" | "project" | null;
+        documentType: "articles" | "pages" | "projects" | null;
       } | null;
     }> | null;
   } | null;
@@ -1298,7 +899,7 @@ export type FOOTERNAVIGATION_QUERYResult = {
         internalUrl: string | null;
         manualUrl: string | null;
         externalUrl: string | null;
-        documentType: "article" | "page" | "project" | null;
+        documentType: "articles" | "pages" | "projects" | null;
       } | null;
     }> | null;
   } | null;
@@ -1314,7 +915,7 @@ declare module "@sanity/client" {
     "\n*[_type == \"article\" && slug.current == $slug][0]{\n    _id,\n    title,\n    seoTitle,\n    seoDescription,\n    body,\n    mainImage,\n    publishedAt,\n    \"categories\": coalesce(\n        categories[]->{\n            _id,\n            slug,\n            title\n        },\n    []),\n    author->{\n        name,\n        image\n    }\n}\n": ARTICLE_QUERYResult;
     "\n*[_type == \"page\" && slug.current == $slug][0]{\n    ...,\n    content[]{\n        ...,\n        video {\n        'url': asset->url,\n        },\n        url{\n            \"internalUrl\": internalUrl->slug.current,\n            manualUrl,\n            externalUrl,\n            \"documentType\": internalUrl->_type,\n        },\n        linkText\n    }\n}\n": PAGE_QUERYResult;
     "\n*[_id == \"siteSettings\"][0]{\n    homePage->{\n        ...,\n        content[]{\n            ...,\n            _type == 'hero' => {\n                video {\n                    'url': asset->url,\n                },\n                url{\n                    \"internalUrl\": internalUrl->slug.current,\n                    manualUrl,\n                    externalUrl,\n                    \"documentType\": internalUrl->_type,\n                },\n                linkText,\n            },\n            _type == 'featured' => {\n                title,\n                documents[]->{\n                    _id,\n                    _type,\n                    title,\n                    slug,\n                    mainImage,\n                    \"categories\": coalesce(\n                        categories[]->{\n                            _id,\n                            slug,\n                            title\n                        },\n                    []),\n                    author->{\n                        name,\n                        image\n                    }                    \n                }\n            }\n        }      \n    }\n}\n": HOME_PAGE_QUERYResult;
-    "\n*[_id == \"siteSettings\"][0]{\n    title,\n    image,\n    primaryNav->{\n        navId,\n        items[]{\n            _key,\n            text,\n            url{\n                \"internalUrl\": internalUrl->slug.current,\n                manualUrl,\n                externalUrl,\n                \"documentType\": internalUrl->_type,\n            }\n        }\n    },\n}\n": PRIMARYNAVIGATION_QUERYResult;
+    "*[_id == \"siteSettings\"][0]{\n    title,\n    image,\n    primaryNav->{\n        navId,\n        items[]{\n            _key,\n            text,\n            url{\n                \"internalUrl\": internalUrl->slug.current,\n                manualUrl,\n                externalUrl,\n                \"documentType\": internalUrl->_type,\n            }\n        }\n    },\n}\n": PRIMARYNAVIGATION_QUERYResult;
     "\n    *[_id == \"siteSettings\"][0]{\n        title,\n        image,\n        footerNav->{\n            navId,\n            items[]{\n                _key,\n                text,\n                url{\n                    \"internalUrl\": internalUrl->slug.current,\n                    manualUrl,\n                    externalUrl,\n                    \"documentType\": internalUrl->_type,\n                }\n            }\n        },\n    }\n    ": FOOTERNAVIGATION_QUERYResult;
   }
 }

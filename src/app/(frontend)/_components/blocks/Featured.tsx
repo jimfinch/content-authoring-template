@@ -30,10 +30,10 @@ type Statement = {
 }
 
 export function Featured({ title, documents }: Statement) {
-	const fadeInUp = {
-		initial: { y: "48px", opacity: 0 },
-		animate: { y: "0", opacity: 1 },
-		exit: { y: "48px", opacity: 0 },
+	const fadeScaleUp = {
+		initial: { y: "48px", opacity: 0, scale: 0.9 },
+		animate: { y: "0", opacity: 1, scale: 1 },
+		exit: { y: "48px", opacity: 0, scale: 0.9 },
 	}
 
 	const slideFromLeft = {
@@ -65,11 +65,12 @@ export function Featured({ title, documents }: Statement) {
 					documents.map((document) => (
 						<Link key={document._id} href={HandleSlug(document)}>
 							<motion.article
-								variants={fadeInUp}
+								variants={fadeScaleUp}
 								transition={{ duration: 0.75 }}
 								initial="initial"
 								whileInView="animate"
 								exit="exit"
+								viewport={{ amount: 0.1 }}
 								className="group w-full"
 							>
 								{document.mainImage ? (

@@ -12,10 +12,10 @@ type SplitImageProps = Extract<
 >
 
 export function SplitImage({ title, image, orientation }: SplitImageProps) {
-	const fadeIn = {
-		initial: { opacity: 0 },
-		animate: { opacity: 1 },
-		exit: { opacity: 0 },
+	const scaleFadeIn = {
+		initial: { scale: 0.9 },
+		animate: { scale: 1 },
+		exit: { scale: 0.9 },
 	}
 
 	const slideFadeIn = {
@@ -31,11 +31,12 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 		>
 			{image ? (
 				<motion.div
-					variants={fadeIn}
+					variants={scaleFadeIn}
 					transition={{ duration: 0.75 }}
 					initial="initial"
 					whileInView="animate"
 					exit="exit"
+					viewport={{ amount: 0.1 }}
 					className="w-full lg:w-2/3 h-auto"
 				>
 					<Image

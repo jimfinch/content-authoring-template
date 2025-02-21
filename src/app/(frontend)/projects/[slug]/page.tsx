@@ -1,6 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/live"
-import { ARTICLE_QUERY } from "@/sanity/lib/queries"
-import { Article } from "@/app/(frontend)/_components/article/Article"
+import { PROJECT_QUERY } from "@/sanity/lib/queries"
+import { Project } from "@/app/(frontend)/_components/projects/Project"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
 
@@ -10,30 +10,31 @@ type RouteProps = {
 
 const getPage = async (params: RouteProps["params"]) =>
 	sanityFetch({
-		query: ARTICLE_QUERY,
+		query: PROJECT_QUERY,
 		params: await params,
 	})
 
 export async function generateMetadata({
 	params,
 }: RouteProps): Promise<Metadata> {
-	const { data: article } = await getPage(params)
+	const { data: project } = await getPage(params)
 
 	return {
-		title: article?.seoTitle,
-		description: article?.seoDescription,
+		title: project?.seoTitle,
+		description: project?.seoDescription,
 	}
 }
 
 export default async function Page({ params }: RouteProps) {
-	const { data: article } = await getPage(params)
-	if (!article) {
+	const { data: project } = await getPage(params)
+
+	if (!project) {
 		notFound()
 	}
 
 	return (
 		<main className="pt-40">
-			<Article {...article} />
+			<Project {...project} />
 		</main>
 	)
 }

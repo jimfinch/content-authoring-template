@@ -1,11 +1,11 @@
 import { sanityFetch } from "@/sanity/lib/live"
 import { ARTICLES_QUERY } from "@/sanity/lib/queries"
-import { ArticleCard } from "@/app/(frontend)/_components/article/ArticleCard"
+import { ArticleCard } from "@/app/(frontend)/_components/articles/ArticleCard"
 import { Title } from "@/app/(frontend)/_components/title/Title"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-	title: "Article Index - Portfolio Template",
+	title: "Article Index - Content Authoring Template",
 	description: "Article Index Descripton",
 }
 

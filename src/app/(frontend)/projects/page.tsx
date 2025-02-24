@@ -1,11 +1,11 @@
 import { sanityFetch } from "@/sanity/lib/live"
 import { PROJECTS_QUERY } from "@/sanity/lib/queries"
-import { ProjectCard } from "@/app/(frontend)/_components/project/ProjectCard"
+import { ProjectCard } from "@/app/(frontend)/_components/projects/ProjectCard"
 import { Title } from "@/app/(frontend)/_components/title/Title"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-	title: "Project Index - Portfolio Template",
+	title: "Project Index - Content Authoring Template",
 	description: "Project Index Descripton",
 }
 

@@ -1,8 +1,11 @@
 export default function HandleSlug(document: {
 	_type: string
-	slug: { current: string }
+	slug?: { current?: string } // Make slug optional
 }) {
-	return document._type == "page"
-		? "/" + document.slug.current
-		: "/" + document._type + "/" + document.slug.current
+	// Add null check and provide a fallback
+	const slugPath = document.slug?.current || ""
+
+	return document._type === "pages"
+		? "/" + slugPath
+		: "/" + document._type + "/" + slugPath
 }

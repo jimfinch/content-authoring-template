@@ -1,8 +1,11 @@
 import { sanityFetch } from "@/sanity/lib/live"
 import { PROJECT_QUERY } from "@/sanity/lib/queries"
-import { Project } from "@/app/(frontend)/_components/project/Project"
+import { Project } from "@/app/(frontend)/_components/projects/Project"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
+
+import { draftMode } from "next/headers"
+import { client } from "@/sanity/lib/client"
 
 type RouteProps = {
 	params: Promise<{ slug: string }>

@@ -1,6 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/live"
 import { ARTICLE_QUERY } from "@/sanity/lib/queries"
-import { Article } from "@/app/(frontend)/_components/article/Article"
+import { Article } from "@/app/(frontend)/_components/articles/Article"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
 

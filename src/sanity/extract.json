@@ -263,7 +263,7 @@
                       "optional": true
                     }
                   },
-                  "dereferencesTo": "project"
+                  "dereferencesTo": "projects"
                 },
                 {
                   "type": "object",
@@ -289,7 +289,7 @@
                       "optional": true
                     }
                   },
-                  "dereferencesTo": "article"
+                  "dereferencesTo": "articles"
                 },
                 {
                   "type": "object",
@@ -315,7 +315,7 @@
                       "optional": true
                     }
                   },
-                  "dereferencesTo": "page"
+                  "dereferencesTo": "pages"
                 }
               ]
             }
@@ -500,7 +500,7 @@
               "optional": true
             }
           },
-          "dereferencesTo": "page"
+          "dereferencesTo": "pages"
         },
         "optional": true
       },
@@ -1215,7 +1215,7 @@
                     "optional": true
                   }
                 },
-                "dereferencesTo": "project"
+                "dereferencesTo": "projects"
               },
               {
                 "type": "object",
@@ -1241,7 +1241,7 @@
                     "optional": true
                   }
                 },
-                "dereferencesTo": "page"
+                "dereferencesTo": "pages"
               },
               {
                 "type": "object",
@@ -1267,7 +1267,7 @@
                     "optional": true
                   }
                 },
-                "dereferencesTo": "article"
+                "dereferencesTo": "articles"
               }
             ]
           },
@@ -1378,7 +1378,7 @@
     }
   },
   {
-    "name": "page",
+    "name": "pages",
     "type": "document",
     "attributes": {
       "_id": {
@@ -1391,7 +1391,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "page"
+          "value": "pages"
         }
       },
       "_createdAt": {
@@ -1636,7 +1636,7 @@
     }
   },
   {
-    "name": "project",
+    "name": "projects",
     "type": "document",
     "attributes": {
       "_id": {
@@ -1649,7 +1649,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "project"
+          "value": "projects"
         }
       },
       "_createdAt": {
@@ -2100,7 +2100,7 @@
     }
   },
   {
-    "name": "article",
+    "name": "articles",
     "type": "document",
     "attributes": {
       "_id": {
@@ -2113,7 +2113,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "article"
+          "value": "articles"
         }
       },
       "_createdAt": {

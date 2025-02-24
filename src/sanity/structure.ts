@@ -5,9 +5,9 @@ export const structure: StructureResolver = (S) =>
 	S.list()
 		.title("Site")
 		.items([
-			S.documentTypeListItem("project").title("Projects"),
-			S.documentTypeListItem("article").title("Articles"),
-			S.documentTypeListItem("page").title("Pages"),
+			S.documentTypeListItem("projects").title("Projects"),
+			S.documentTypeListItem("articles").title("Articles"),
+			S.documentTypeListItem("pages").title("Pages"),
 			S.divider(),
 			S.documentTypeListItem("category").title("Categories"),
 			S.documentTypeListItem("author").title("Authors"),
@@ -27,9 +27,9 @@ export const structure: StructureResolver = (S) =>
 				(item) =>
 					item.getId() &&
 					![
-						"project",
-						"article",
-						"page",
+						"projects",
+						"articles",
+						"pages",
 						"category",
 						"author",
 						"siteSettings",

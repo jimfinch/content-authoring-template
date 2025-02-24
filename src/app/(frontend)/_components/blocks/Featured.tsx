@@ -97,7 +97,7 @@ export function Featured({ title, documents }: Statement) {
 									</h2>
 
 									{/* Render author if matches article type */}
-									{document._type == "article" ? (
+									{document._type == "articles" ? (
 										<div>
 											<Author
 												className="mt-3 mb-4"
@@ -111,14 +111,13 @@ export function Featured({ title, documents }: Statement) {
 										</div>
 									) : null}
 								</div>
-
-								<div className="flex flex-wrap gap-4 mt-4">
-									{document.categories && (
+								{document.categories && (
+									<div className="flex flex-wrap gap-4 mt-4">
 										<Categories
 											categories={document.categories}
 										/>
-									)}
-								</div>
+									</div>
+								)}
 							</motion.article>
 						</Link>
 					))}

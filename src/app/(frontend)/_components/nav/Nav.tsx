@@ -25,8 +25,8 @@ export async function Nav() {
 						<Image
 							priority
 							src={urlFor(logo).url()}
-							width={90}
-							height={25}
+							width={100}
+							height={30}
 							alt={logo?.alt || title}
 						/>
 					) : (

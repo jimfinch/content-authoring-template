@@ -13,6 +13,6 @@ export default async function Page() {
 	}
 
 	return page?.homePage?.content ? (
-		<PageBuilder content={page?.homePage.content} />
+		<PageBuilder content={page?.homePage.content as any} />
 	) : null
 }

@@ -8,7 +8,6 @@ import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "motion/react"
-import HandleSlug from "../_utils/HandleSlug"
 
 export function ArticleCard(props: ARTICLE_QUERYResult[0]) {
 	const { title, author, mainImage, publishedAt, categories, slug } = props
@@ -20,7 +19,7 @@ export function ArticleCard(props: ARTICLE_QUERYResult[0]) {
 	}
 
 	return (
-		<Link href={HandleSlug(slug)}>
+		<Link href={`articles/${slug.current}`}>
 			<motion.article
 				variants={fadeScaleUp}
 				transition={{ duration: 0.75 }}

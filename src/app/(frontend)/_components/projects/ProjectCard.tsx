@@ -18,7 +18,7 @@ export function ProjectCard(props: PROJECT_QUERYResult[0]) {
 	}
 
 	return (
-		<Link href={HandleSlug(slug)}>
+		<Link href={`projects/${slug.current}`}>
 			<motion.article
 				variants={fadeScaleUp}
 				transition={{ duration: 0.75 }}

@@ -9,10 +9,10 @@ import { Lenis } from "./_components/_utils/Lenis"
 
 export const metadata: Metadata = {
 	title: {
-		template: "%s — Content Authoring Template",
-		default: "Content Authoring Template", // a default is required when creating a template
+		template: "%s — Content Authoring Boilerplate",
+		default: "Content Authoring Boilerplate", // a default is required when creating a template
 	},
-	description: "Next.js and Sanity.io content authoring template", // a default is required when creating a template
+	description: "Next.js and Sanity.io content authoring boilerplate", // a default is required when creating a template
 }
 
 export default function RootLayout({

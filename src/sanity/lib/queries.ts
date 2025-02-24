@@ -9,17 +9,16 @@ export const PROJECTS_QUERY = defineQuery(`
     mainImage,
     publishedAt,
     "categories": coalesce(
-    categories[]->{
-        _id,
-        slug,
-        title
-    },
-    []
+        categories[]->{
+            _id,
+            slug,
+            title
+        },[]
     ),
     author->{
-    name,
-    image
-    }
+        name,
+        image
+    },
 }
 `)
 
@@ -33,16 +32,19 @@ export const PROJECT_QUERY = defineQuery(`
     mainImage,
     publishedAt,
     "categories": coalesce(
-    categories[]->{
-        _id,
-        slug,
-        title
-    },
-    []
+        categories[]->{
+            _id,
+            slug,
+            title
+        },[]
     ),
     author->{
-    name,
-    image
+        name,
+        image
+    },
+    relatedProjects[]{
+    _key, // required for drag and drop
+        ...@->{_id, title, slug} // get fields from the referenced post
     }
 }
 `)
@@ -60,8 +62,8 @@ export const ARTICLES_QUERY = defineQuery(`
             _id,
             slug,
             title
-        },
-    []),
+        },[]
+    ),
     author->{
         name,
         image
@@ -83,11 +85,15 @@ export const ARTICLE_QUERY = defineQuery(`
             _id,
             slug,
             title
-        },
-    []),
+        },[]
+    ),
     author->{
         name,
         image
+    },
+    relatedArticles[]{
+    _key, // required for drag and drop
+        ...@->{_id, title, slug} // get fields from the referenced post
     }
 }
 `)

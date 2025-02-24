@@ -32,7 +32,7 @@ export const featuredType = defineType({
 		prepare({ title }) {
 			return {
 				title,
-				subtitle: "Featured document",
+				subtitle: "Featured documents",
 			}
 		},
 	},

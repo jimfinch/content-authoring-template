@@ -5,7 +5,7 @@ import { Title } from "@/app/(frontend)/_components/title/Title"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-	title: "Project Index - Content Authoring Template",
+	title: "Project Index - Content Authoring Boilerplate",
 	description: "Project Index Descripton",
 }
 

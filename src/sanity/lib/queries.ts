@@ -1,4 +1,5 @@
 import { defineQuery } from "next-sanity"
+import { groq } from "next-sanity"
 
 export const PROJECTS_QUERY = defineQuery(`
 *[_type == "projects" && defined(slug.current)]|order(publishedAt desc)[0...12]{
@@ -9,17 +10,16 @@ export const PROJECTS_QUERY = defineQuery(`
     mainImage,
     publishedAt,
     "categories": coalesce(
-    categories[]->{
-        _id,
-        slug,
-        title
-    },
-    []
+        categories[]->{
+            _id,
+            slug,
+            title
+        },[]
     ),
     author->{
-    name,
-    image
-    }
+        name,
+        image
+    },
 }
 `)
 
@@ -33,16 +33,19 @@ export const PROJECT_QUERY = defineQuery(`
     mainImage,
     publishedAt,
     "categories": coalesce(
-    categories[]->{
-        _id,
-        slug,
-        title
-    },
-    []
+        categories[]->{
+            _id,
+            slug,
+            title
+        },[]
     ),
     author->{
-    name,
-    image
+        name,
+        image
+    },
+    relatedProjects[]{
+    _key, // required for drag and drop
+        ...@->{_id, title, slug} // get fields from the referenced post
     }
 }
 `)
@@ -60,8 +63,8 @@ export const ARTICLES_QUERY = defineQuery(`
             _id,
             slug,
             title
-        },
-    []),
+        },[]
+    ),
     author->{
         name,
         image
@@ -83,11 +86,15 @@ export const ARTICLE_QUERY = defineQuery(`
             _id,
             slug,
             title
-        },
-    []),
+        },[]
+    ),
     author->{
         name,
         image
+    },
+    relatedArticles[]{
+    _key, // required for drag and drop
+        ...@->{_id, title, slug} // get fields from the referenced post
     }
 }
 `)
@@ -193,3 +200,26 @@ export const FOOTERNAVIGATION_QUERY = defineQuery(`
         },
     }
     `)
+
+export const CATEGORY_QUERY = defineQuery(`
+  *[_type == "category" && slug.current == $slug][0] {
+    _id,
+    title,
+    "articles": *[_type == "articles" && references(^._id)] {
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      author->,
+      categories[]->
+    },
+    "projects": *[_type == "projects" && references(^._id)] {
+      _id,
+      title,
+      slug,
+      mainImage,
+      categories[]->
+    }
+  }
+`)

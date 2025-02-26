@@ -76,6 +76,11 @@ export const projectType = defineType({
 			name: "body",
 			type: "blockContent",
 		}),
+		defineField({
+			name: "relatedProjects",
+			type: "array",
+			of: [{ type: "reference", to: { type: "projects" } }],
+		}),
 	],
 	preview: {
 		select: {

@@ -76,6 +76,11 @@ export const articleType = defineType({
 			name: "body",
 			type: "blockContent",
 		}),
+		defineField({
+			name: "relatedArticles",
+			type: "array",
+			of: [{ type: "reference", to: { type: "articles" } }],
+		}),
 	],
 	preview: {
 		select: {

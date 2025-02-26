@@ -1,9 +1,9 @@
-import { PROJECT_QUERYResult } from "@/sanity/types"
+import { ARTICLE_QUERYResult } from "@/sanity/types"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 
 type AuthorProps = {
-	author: NonNullable<PROJECT_QUERYResult>["author"]
+	author: NonNullable<ARTICLE_QUERYResult>["author"]
 	className?: string
 }
 

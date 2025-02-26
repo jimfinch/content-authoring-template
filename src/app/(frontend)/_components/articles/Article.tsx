@@ -7,9 +7,23 @@ import { PublishedAt } from "@/app/(frontend)/_components/published/Published"
 import { Title } from "@/app/(frontend)/_components/title/Title"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
+import { RelatedArticles } from "@/app/(frontend)/_components/relatedItems/RelatedArticles"
 
-export function Article(props: NonNullable<ARTICLE_QUERYResult>) {
-	const { title, author, mainImage, body, publishedAt, categories } = props
+interface ArticleProps extends NonNullable<ARTICLE_QUERYResult> {}
+
+export function Article({
+	title,
+	author,
+	mainImage,
+	body,
+	publishedAt,
+	categories,
+	relatedArticles,
+	_id,
+}: ArticleProps) {
+	const imageWidth = 1920
+	const imageHeight = 1080
+	const imageAlt = mainImage?.alt || title || ""
 
 	return (
 		<article>
@@ -25,10 +39,13 @@ export function Article(props: NonNullable<ARTICLE_QUERYResult>) {
 				<figure>
 					<Image
 						priority
-						src={urlFor(mainImage).width(1920).height(1080).url()}
-						width={1920}
-						height={1080}
-						alt={mainImage.alt || title || ""}
+						src={urlFor(mainImage)
+							.width(imageWidth)
+							.height(imageHeight)
+							.url()}
+						width={imageWidth}
+						height={imageHeight}
+						alt={imageAlt}
 						className="w-full object-cover"
 					/>
 				</figure>
@@ -37,10 +54,20 @@ export function Article(props: NonNullable<ARTICLE_QUERYResult>) {
 				<div className="container mx-auto prose prose-invert lg:prose-lg my-12 lg:my-24 px-6">
 					<PortableText value={body} components={components} />
 
-					<div className="flex flex-wrap gap-4 mt-24">
-						<Categories categories={categories} />
-					</div>
+					{categories && (
+						<div className="flex flex-wrap gap-4 mt-24">
+							<Categories categories={categories} />
+						</div>
+					)}
 				</div>
+			) : null}
+
+			{relatedArticles ? (
+				<RelatedArticles
+					relatedArticles={relatedArticles}
+					documentId={_id}
+					documentType="article"
+				/>
 			) : null}
 		</article>
 	)

@@ -1,60 +1,32 @@
 "use client"
 
+import { BaseCard } from "@/app/(frontend)/_components/cards/BaseCard"
 import { Author } from "@/app/(frontend)/_components/author/Author"
 import { Categories } from "@/app/(frontend)/_components/categories/Categories"
-import { ARTICLE_QUERYResult } from "@/sanity/types"
 import { PublishedAt } from "@/app/(frontend)/_components/published/Published"
-import { urlFor } from "@/sanity/lib/image"
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "motion/react"
-import HandleSlug from "../_utils/HandleSlug"
+import { ARTICLE_QUERYResult } from "@/sanity/types"
 
 export function ArticleCard(props: ARTICLE_QUERYResult[0]) {
-	const { title, author, mainImage, publishedAt, categories, slug } = props
-
-	const fadeScaleUp = {
-		initial: { y: "48px", opacity: 0, scale: 0.9 },
-		animate: { y: "0", opacity: 1, scale: 1 },
-		exit: { y: "48px", opacity: 0, scale: 0.9 },
-	}
+	const { title, author, mainImage, publishedAt, categories, slug, _id } =
+		props
 
 	return (
-		<Link href={HandleSlug(slug)}>
-			<motion.article
-				variants={fadeScaleUp}
-				transition={{ duration: 0.75 }}
-				initial="initial"
-				whileInView="animate"
-				exit="exit"
-				viewport={{ amount: 0.1 }}
-				className="group w-full"
-			>
-				{mainImage ? (
-					<div className="rounded-md overflow-hidden">
-						<Image
-							src={urlFor(mainImage).width(500).height(600).url()}
-							width={500}
-							height={600}
-							alt={mainImage.alt || title || ""}
-							className="rounded-md w-full h-auto transition-all duration-500 group-hover:scale-110"
-						/>
-					</div>
-				) : null}
-				<div>
-					<h2 className="text-2xl mt-3">{title}</h2>
-					<div className="flex flex-row items-center">
-						<Author className="mt-3 mb-4" author={author} />
-						<span className="text-neutral-500 font-bold">
-							,&nbsp;
-						</span>
-						<PublishedAt publishedAt={publishedAt} />
-					</div>
-					<div className="flex flex-wrap gap-4">
-						{categories && <Categories categories={categories} />}
-					</div>
-				</div>
-			</motion.article>
-		</Link>
+		<BaseCard
+			href={`/articles/${slug.current}`}
+			title={title}
+			mainImage={mainImage}
+			_id={_id}
+			_type="article"
+			slug={slug}
+		>
+			<div className="flex flex-row items-center">
+				<Author className="mt-3 mb-4" author={author} />
+				<span className="text-neutral-500 font-bold">,&nbsp;</span>
+				<PublishedAt publishedAt={publishedAt} />
+			</div>
+			{categories && (
+				<Categories categories={categories} className="mt-4" />
+			)}
+		</BaseCard>
 	)
 }

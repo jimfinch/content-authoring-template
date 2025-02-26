@@ -6,7 +6,7 @@ import Link from "next/link"
 import { Categories } from "../categories/Categories"
 import { Author } from "../author/Author"
 import { PublishedAt } from "../published/Published"
-import HandleSlug from "../_utils/HandleSlug"
+import { generateUrl } from "@/app/(frontend)/_utils/urlHelpers"
 import { motion } from "motion/react"
 
 type Document = {
@@ -63,7 +63,13 @@ export function Featured({ title, documents }: Statement) {
 			<div className="container mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-20">
 				{documents &&
 					documents.map((document) => (
-						<Link key={document._id} href={HandleSlug(document)}>
+						<Link
+							key={document._id}
+							href={generateUrl({
+								documentType: document._type,
+								slug: document.slug?.current,
+							})}
+						>
 							<motion.article
 								variants={fadeScaleUp}
 								transition={{ duration: 0.75 }}
@@ -97,7 +103,7 @@ export function Featured({ title, documents }: Statement) {
 									</h2>
 
 									{/* Render author if matches article type */}
-									{document._type == "article" ? (
+									{document._type == "articles" ? (
 										<div>
 											<Author
 												className="mt-3 mb-4"
@@ -111,14 +117,13 @@ export function Featured({ title, documents }: Statement) {
 										</div>
 									) : null}
 								</div>
-
-								<div className="flex flex-wrap gap-4 mt-4">
-									{document.categories && (
+								{document.categories && (
+									<div className="flex flex-wrap gap-4 mt-4">
 										<Categories
 											categories={document.categories}
 										/>
-									)}
-								</div>
+									</div>
+								)}
 							</motion.article>
 						</Link>
 					))}

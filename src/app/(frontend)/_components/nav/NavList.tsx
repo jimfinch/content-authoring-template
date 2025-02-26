@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { motion } from "motion/react"
 import { useRef, useState } from "react"
-import HandleUrl from "../_utils/HandleUrl"
+import { generateUrl } from "@/app/(frontend)/_utils/urlHelpers"
 
 interface NavItem {
 	_key: string
@@ -106,17 +106,10 @@ export function NavList({ items }: NavLinksProps) {
 						{item.url?.internalUrl && (
 							<Link
 								onClick={() => setIsOpen(false)}
-								href={
-									item.url?.documentType &&
-									item.url?.internalUrl
-										? HandleUrl({
-												documentType:
-													item.url.documentType,
-												internalUrl:
-													item.url.internalUrl,
-											})
-										: "#"
-								}
+								href={generateUrl({
+									documentType: item.url.documentType,
+									internalUrl: item.url.internalUrl,
+								})}
 								className={`rounded-full bg-opacity-50 px-3 py-1 lg:px-5 lg:py-2 transition duration-300 ease-in-out font-bold ${isOpen ? "w-full text-5xl mb-3 font-normal" : null}`}
 							>
 								{item.text}

@@ -5,10 +5,18 @@ import { PortableText } from "next-sanity"
 import { Title } from "@/app/(frontend)/_components/title/Title"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
+import { RelatedProjects } from "@/app/(frontend)/_components/relatedItems/RelatedProjects"
 
 interface ProjectProps extends NonNullable<PROJECT_QUERYResult> {}
 
-export function Project({ title, mainImage, body, categories }: ProjectProps) {
+export function Project({
+	title,
+	mainImage,
+	body,
+	categories,
+	relatedProjects,
+	_id,
+}: ProjectProps) {
 	const imageWidth = 1920
 	const imageHeight = 1080
 	const imageAlt = mainImage?.alt || title || ""
@@ -39,10 +47,20 @@ export function Project({ title, mainImage, body, categories }: ProjectProps) {
 				<div className="container mx-auto prose prose-invert lg:prose-lg mt-24 px-6">
 					<PortableText value={body} components={components} />
 
-					<div className="flex flex-wrap gap-4 mt-24">
-						<Categories categories={categories} />
-					</div>
+					{categories && (
+						<div className="flex flex-wrap gap-4 mt-24">
+							<Categories categories={categories} />
+						</div>
+					)}
 				</div>
+			)}
+
+			{relatedProjects && (
+				<RelatedProjects
+					relatedProjects={relatedProjects}
+					documentId={_id}
+					documentType="project"
+				/>
 			)}
 		</article>
 	)

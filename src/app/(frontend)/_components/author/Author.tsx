@@ -1,6 +1,7 @@
 import { ARTICLE_QUERYResult } from "@/sanity/types"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
+import { IMAGE_SIZES } from "@/app/(frontend)/_utils/constants"
 
 type AuthorProps = {
 	author: NonNullable<ARTICLE_QUERYResult>["author"]
@@ -12,9 +13,12 @@ export function Author({ author, className }: AuthorProps) {
 		<div className={`${className} flex gap-3 items-center`}>
 			{author?.image ? (
 				<Image
-					src={urlFor(author.image).width(100).height(100).url()}
-					width={100}
-					height={100}
+					src={urlFor(author.image)
+						.width(IMAGE_SIZES.avatar.width)
+						.height(IMAGE_SIZES.avatar.height)
+						.url()}
+					width={IMAGE_SIZES.avatar.width}
+					height={IMAGE_SIZES.avatar.height}
 					alt={author.name || ""}
 					className="rounded-full w-8 h-8"
 				/>

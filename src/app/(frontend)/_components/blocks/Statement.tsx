@@ -2,6 +2,7 @@
 
 import { PAGE_QUERYResult } from "@/sanity/types"
 import { motion } from "motion/react"
+import { animations } from "@/app/(frontend)/_utils/animations"
 
 type Statment = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
@@ -9,16 +10,10 @@ type Statment = Extract<
 >
 
 export function Statement({ title }: Statment) {
-	const slideFadeFromBottom = {
-		initial: { x: "-48px", opacity: 0 },
-		animate: { x: "0px", opacity: 1 },
-		exit: { x: "-48px", opacity: 0 },
-	}
-
 	return (
 		<section className="container mx-auto flex gap-8 px-6 lg:px-10 py-24">
 			<motion.div
-				variants={slideFadeFromBottom}
+				variants={animations.slideFadeFromBottom}
 				transition={{ duration: 1 }}
 				initial="initial"
 				whileInView="animate"

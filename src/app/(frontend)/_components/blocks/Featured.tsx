@@ -1,54 +1,36 @@
 "use client"
 
-import { urlFor } from "@/sanity/lib/image"
-import Image from "next/image"
-import Link from "next/link"
-import { Categories } from "../categories/Categories"
 import { Author } from "../author/Author"
 import { PublishedAt } from "../published/Published"
-import { generateUrl } from "@/app/(frontend)/_utils/urlHelpers"
+import { Categories } from "../categories/Categories"
+import { BaseCard } from "../cards/BaseCard"
 import { motion } from "motion/react"
+import { generateUrl } from "@/app/(frontend)/_utils/urlHelpers"
+import { animations } from "@/app/(frontend)/_utils/animations"
+import { PAGE_QUERYResult } from "@/sanity/types"
 
 type Document = {
-	_id: string
-	mainImage?: {
-		alt?: string
-	}
-	title?: string
-	_type: string
-	author?: any
-	publishedAt?: string
-	categories?: any[]
-	slug: {
-		current: string
-	}
+	_ref: string
+	_type: "reference"
+	_weak?: boolean
+	_key?: string
 }
-
-type Statement = {
-	title?: string
+type FeaturedProps = Extract<
+	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+	{ _type: "featured" }
+> & {
+	title: string
 	documents: Document[]
 }
 
-export function Featured({ title, documents }: Statement) {
-	const fadeScaleUp = {
-		initial: { y: "48px", opacity: 0, scale: 0.9 },
-		animate: { y: "0", opacity: 1, scale: 1 },
-		exit: { y: "48px", opacity: 0, scale: 0.9 },
-	}
-
-	const slideFromLeft = {
-		initial: { marginLeft: "-60px" },
-		animate: { marginLeft: "0px" },
-		exit: { marginLeft: "-60px" },
-	}
-
+export function Featured({ title, documents }: FeaturedProps) {
 	return (
 		<section className="py-12 md:py-24">
 			{title ? (
 				<div className="pb-7 mb-12 md:mb-20 border-b border-solid border-b-neutral-800">
 					<div className="container mx-auto px-6 lg:px-10">
 						<motion.h3
-							variants={slideFromLeft}
+							variants={animations.slideFromLeft}
 							transition={{ duration: 0.75 }}
 							initial="initial"
 							whileInView="animate"
@@ -63,69 +45,43 @@ export function Featured({ title, documents }: Statement) {
 			<div className="container mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-20">
 				{documents &&
 					documents.map((document) => (
-						<Link
-							key={document._id}
+						<BaseCard
+							key={document._ref}
 							href={generateUrl({
 								documentType: document._type,
 								slug: document.slug?.current,
 							})}
+							title={document.title}
+							mainImage={document.mainImage}
+							_id={document._id}
+							_type={document._type}
+							slug={document.slug}
 						>
-							<motion.article
-								variants={fadeScaleUp}
-								transition={{ duration: 0.75 }}
-								initial="initial"
-								whileInView="animate"
-								exit="exit"
-								viewport={{ amount: 0.1 }}
-								className="group w-full"
-							>
-								{document.mainImage ? (
-									<div className="rounded-md overflow-hidden">
-										<Image
-											src={urlFor(document.mainImage)
-												.width(500)
-												.height(600)
-												.url()}
-											width={500}
-											height={600}
-											alt={
-												document.mainImage.alt ||
-												document.title ||
-												""
-											}
-											className="w-full h-auto transition-all duration-500 group-hover:scale-110"
-										/>
-									</div>
-								) : null}
-								<div>
-									<h2 className="text-2xl mt-3">
-										{document.title}
-									</h2>
-
-									{/* Render author if matches article type */}
-									{document._type == "articles" ? (
-										<div>
-											<Author
-												className="mt-3 mb-4"
-												author={document.author}
-											/>
-											<PublishedAt
-												publishedAt={
-													document.publishedAt || null
-												}
-											/>
-										</div>
-									) : null}
+							{/* Render author if matches article type */}
+							{document._type === "articles" ? (
+								<div className="flex flex-row items-center">
+									<Author
+										className="mt-3 mb-4"
+										author={document.author}
+									/>
+									<span className="text-neutral-500 font-bold">
+										,&nbsp;
+									</span>
+									<PublishedAt
+										publishedAt={
+											document.publishedAt || null
+										}
+									/>
 								</div>
-								{document.categories && (
-									<div className="flex flex-wrap gap-4 mt-4">
-										<Categories
-											categories={document.categories}
-										/>
-									</div>
-								)}
-							</motion.article>
-						</Link>
+							) : null}
+							{document.categories && (
+								<div className="flex flex-wrap gap-4 mt-4">
+									<Categories
+										categories={document.categories}
+									/>
+								</div>
+							)}
+						</BaseCard>
 					))}
 			</div>
 		</section>

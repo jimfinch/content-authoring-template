@@ -5,25 +5,13 @@ import { urlFor } from "@/sanity/lib/image"
 import { PAGE_QUERYResult } from "@/sanity/types"
 import { stegaClean } from "next-sanity"
 import { motion } from "motion/react"
-
+import { animations } from "@/app/(frontend)/_utils/animations"
 type SplitImageProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
 	{ _type: "splitImage" }
 >
 
 export function SplitImage({ title, image, orientation }: SplitImageProps) {
-	const scaleFadeIn = {
-		initial: { scale: 0.9 },
-		animate: { scale: 1 },
-		exit: { scale: 0.9 },
-	}
-
-	const slideFadeIn = {
-		initial: { y: "48px", opacity: 0 },
-		animate: { y: 0, opacity: 1 },
-		exit: { y: "48px", opacity: 0 },
-	}
-
 	return (
 		<section
 			className="container mx-auto flex flex-col lg:flex-row gap-12 md:gap-20 px-6 lg:px-10 py-6 md:py-24 lg:data-[orientation='imageRight']:flex-row-reverse"
@@ -31,7 +19,7 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 		>
 			{image ? (
 				<motion.div
-					variants={scaleFadeIn}
+					variants={animations.scaleFadeIn}
 					transition={{ duration: 0.75 }}
 					initial="initial"
 					whileInView="animate"
@@ -49,7 +37,7 @@ export function SplitImage({ title, image, orientation }: SplitImageProps) {
 				</motion.div>
 			) : null}
 			<motion.div
-				variants={slideFadeIn}
+				variants={animations.slideFadeIn}
 				transition={{ duration: 0.75 }}
 				initial="initial"
 				whileInView="animate"

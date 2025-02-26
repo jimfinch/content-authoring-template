@@ -7,9 +7,11 @@ import { Title } from "@/app/(frontend)/_components/title/Title"
 import { urlFor } from "@/sanity/lib/image"
 import { PAGE_QUERYResult } from "@/sanity/types"
 import Video from "../video/Video"
-import { motion, useScroll, useTransform } from "motion/react"
+import { motion } from "motion/react"
 import Link from "next/link"
-import HandleUrl from "../_utils/HandleUrl"
+import { generateUrl } from "@/app/(frontend)/_utils/urlHelpers"
+import { animations } from "@/app/(frontend)/_utils/animations"
+import { useScrollPosition } from "@/app/(frontend)/_hooks/useScrollPosition"
 
 type HeroProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
@@ -26,21 +28,8 @@ type HeroProps = Extract<
 }
 
 export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
-	// Motion config
 	const scrollRef = useRef(null)
-
-	const { scrollYProgress } = useScroll({
-		target: scrollRef,
-		offset: ["start start", "end start"],
-	})
-
-	const opacity = useTransform(scrollYProgress, [1, 0], [0, 1])
-
-	const slideFromLeft = {
-		initial: { marginLeft: "-60px" },
-		animate: { marginLeft: "0px" },
-		exit: { marginLeft: "-60px" },
-	}
+	const { opacity } = useScrollPosition(scrollRef)
 
 	return (
 		<section
@@ -52,7 +41,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 				<div>
 					{title ? (
 						<motion.div
-							variants={slideFromLeft}
+							variants={animations.slideFromLeft}
 							transition={{ duration: 0.8 }}
 							initial="initial"
 							whileInView="animate"
@@ -65,7 +54,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 					) : null}
 					{text ? (
 						<motion.div
-							variants={slideFromLeft}
+							variants={animations.slideFromLeft}
 							transition={{ duration: 0.8 }}
 							initial="initial"
 							whileInView="animate"
@@ -77,7 +66,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 					) : null}
 					{url && (
 						<motion.div
-							variants={slideFromLeft}
+							variants={animations.slideFromLeft}
 							transition={{ duration: 1 }}
 							initial="initial"
 							whileInView="animate"
@@ -85,7 +74,7 @@ export function Hero({ title, text, image, video, linkText, url }: HeroProps) {
 							className="prose-lg lg:prose-xl prose-invert flex items-center mt-7"
 						>
 							<Link
-								href={HandleUrl(url)}
+								href={generateUrl(url)}
 								className="flex w-fit rounded-full border border-solid border-white px-5 py-2 transition duration-300 ease-in-out font-bold"
 							>
 								{linkText ? linkText : "Add link text"}

@@ -2,6 +2,10 @@ export const TRANSITION_DURATION = 0.75
 export const VIEWPORT_AMOUNT = 0.1
 
 export const IMAGE_SIZES = {
+	avatar: {
+		width: 100,
+		height: 100,
+	},
 	card: {
 		width: 500,
 		height: 600,

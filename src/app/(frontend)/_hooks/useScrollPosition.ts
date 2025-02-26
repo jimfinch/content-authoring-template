@@ -1,21 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useScroll, useTransform } from "motion/react"
+import { RefObject } from "react"
 
-export function useScrollPosition() {
-	const [scrollPosition, setScrollPosition] = useState(0)
+export function useScrollPosition(ref: RefObject<HTMLElement>) {
+	const { scrollYProgress } = useScroll({
+		target: ref,
+		offset: ["start start", "end start"],
+	})
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setScrollPosition(window.scrollY)
-		}
+	const opacity = useTransform(scrollYProgress, [1, 0], [0, 1])
 
-		window.addEventListener("scroll", handleScroll)
-
-		return () => {
-			window.removeEventListener("scroll", handleScroll)
-		}
-	}, [])
-
-	return scrollPosition
+	return { opacity }
 }

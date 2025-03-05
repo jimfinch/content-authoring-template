@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and tailwind.
 
+<img width="1917" alt="Screenshot 2025-03-05 at 16 47 09" src="https://github.com/user-attachments/assets/e2e0f586-80c6-4bf0-b393-3dbd0f31882c" />
+
 ---
 
 # Project features
@@ -14,8 +16,11 @@ This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) 
 ### Next
 
 - App router
-- Tailwind
-- SEO titles and descriptions
+- Pages, Projects and Articles routes
+- Tailwind CSS
+- Fully responsive
+- SEO titles and descriptions added to templates
+- Typegen generate built in to dev command
 
 ### Site Settings
 
@@ -87,6 +92,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Open [http://localhost:3000/studio](http://localhost:3000/studio) to use the Sanity embedded studio.
 
 ---
+
+<img width="1916" alt="Screenshot 2025-03-05 at 16 47 24" src="https://github.com/user-attachments/assets/77b5f402-461f-4977-8b82-1c3b13e1bcdc" />
+
+
+<img width="1916![Uploading Screenshot 2025-03-05 at 16.47.24.png…]()" alt="Screenshot 2025-03-05 at 16 48 44" src="https://github.com/user-attachments/assets/1fb651d2-17ef-4e74-9aa4-9532501858c8" />
+
+
+<img width="1913" alt="Screenshot 2025-03-05 at 16 49 28" src="https://github.com/user-attachments/assets/2dfebec2-74e5-42f6-b6f4-6ada717b2e0f" />
+
 
 ## Learn More
 

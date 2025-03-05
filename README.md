@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) and Sanity.io project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and tailwind.
+This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and tailwind.
 
 ## Project features:
 
@@ -15,7 +15,7 @@ This is a [Next.js](https://nextjs.org) and Sanity.io project bootstrapped with 
 - Tailwind
 - SEO titles and descriptions
 
-### SiteSettings
+### Site Settings
 
 - title
 - description
@@ -26,7 +26,7 @@ This is a [Next.js](https://nextjs.org) and Sanity.io project bootstrapped with 
 
 ### Menus
 
-- Create a set of links of any document type (pages, artciles, projects, hardcoded internal or external)
+- Create a set of links of any document type (pages, articles, projects, hard-coded internal or external)
 
 ### Authors
 
@@ -50,9 +50,11 @@ This is a [Next.js](https://nextjs.org) and Sanity.io project bootstrapped with 
 
 [React Motion](https://motion.dev/) has been implemented for page transitions and component animations when the elements enter and leave the viewport
 
+##
+
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies (use --legacy-peer-deps if needed):
 
 ```bash
 npm install
@@ -81,6 +83,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 Open [http://localhost:3000/studio](http://localhost:3000/studio) to use the Sanity embedded studio.
+
+##
 
 ## Learn More
 

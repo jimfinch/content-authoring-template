@@ -5,12 +5,14 @@ import gsap from "gsap"
 import { useLayoutEffect, useRef } from "react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-type Statment = Extract<
+type Statement = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
-	{ _type: "statement" }
+	{
+		_type: "animatedText"
+	}
 >
 
-export function AnimatedText({ title }: Statment) {
+export function AnimatedText({ title }: Statement) {
 	const slider = useRef(null)
 	const firstText = useRef(null)
 	const secondText = useRef(null)

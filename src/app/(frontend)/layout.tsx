@@ -5,7 +5,7 @@ import Footer from "@/app/(frontend)/_components/footer/Footer"
 import Header from "@/app/(frontend)/_components/header/Header"
 import { Nav } from "./_components/nav/Nav"
 import Template from "./template"
-import { Lenis } from "./_components/_utils/Lenis"
+import { Lenis } from "./_utils/Lenis"
 
 export const metadata: Metadata = {
 	title: {

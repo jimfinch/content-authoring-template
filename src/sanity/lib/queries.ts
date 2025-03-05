@@ -1,5 +1,4 @@
 import { defineQuery } from "next-sanity"
-import { groq } from "next-sanity"
 
 export const PROJECTS_QUERY = defineQuery(`
 *[_type == "projects" && defined(slug.current)]|order(publishedAt desc)[0...12]{
@@ -103,18 +102,42 @@ export const PAGE_QUERY = defineQuery(`
 *[_type == "pages" && slug.current == $slug][0]{
     ...,
     content[]{
-        ...,
-        video {
-        'url': asset->url,
-        },
-        url{
-            "internalUrl": internalUrl->slug.current,
-            manualUrl,
-            externalUrl,
-            "documentType": internalUrl->_type,
-        },
-        linkText
-    }
+            ...,
+            _type == 'hero' => {
+                video {
+                    'url': asset->url,
+                },
+                url{
+                    "internalUrl": internalUrl->slug.current,
+                    manualUrl,
+                    externalUrl,
+                    "documentType": internalUrl->_type,
+                },
+                linkText,
+            },
+            _type == 'featured' => {
+                title,
+                documents[]->{
+                    _id,
+                    _type,
+                    title,
+                    slug,
+                    mainImage,
+                    "categories": coalesce(
+                        categories[]->{
+                            _id,
+                            slug,
+                            title
+                        },
+                    []),
+                    author->{
+                        name,
+                        image
+                    },
+                    publishedAt
+                }
+            }
+        }
 }
 `)
 
@@ -154,7 +177,8 @@ export const HOME_PAGE_QUERY = defineQuery(`
                     author->{
                         name,
                         image
-                    }                    
+                    },
+                    publishedAt
                 }
             }
         }      

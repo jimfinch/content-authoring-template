@@ -20,7 +20,7 @@ export interface WithCategories {
 export interface WithAuthor {
 	author?: {
 		name?: string
-		image?: any
+		image?: object
 	}
 }
 

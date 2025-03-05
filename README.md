@@ -2,20 +2,20 @@ This is a [Next.js](https://nextjs.org) and Sanity.io project bootstrapped with 
 
 ## Project features:
 
-Sanity
+#Sanity
 
 - Sanity studio is an embedded implementation
 - Sanity presentation plugin has been added for live/draft previews and visual editing of content
 - Added usage module on the top of content forms to help users know where the content is being used across the application
 - Sanity media plugin has been added for asset management
 
-Next
+#Next
 
 - App router
 - Tailwind
 - SEO titles and descriptions
 
-SiteSettings
+#SiteSettings
 
 - title
 - description
@@ -24,22 +24,27 @@ SiteSettings
 - Primary navigation
 - Footer navigation
 
-Menus
+### Menus
 
 - Create a set of links of any document type (pages, artciles, projects, hardcoded internal or external)
 
-Authors
-Categories
+### Authors
 
-Projects
+- Create authors
+
+### Categories
+
+- Create categories/tags
+
+### Projects
 
 - Basic project content starter with title, hero image, portable text body, categories/tags, and related content builder
 
-Articles
+### Articles
 
 - Basic article content starter with title, hero image, portable text body, categories/tags, and related content builder
 
-Pages
+### Pages
 
 - Page builder for landing pages that is used to make the homepage from the sample data
 

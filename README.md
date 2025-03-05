@@ -2,20 +2,20 @@ This is a [Next.js](https://nextjs.org) and Sanity.io project bootstrapped with 
 
 ## Project features:
 
-#Sanity
+### Sanity
 
 - Sanity studio is an embedded implementation
 - Sanity presentation plugin has been added for live/draft previews and visual editing of content
 - Added usage module on the top of content forms to help users know where the content is being used across the application
 - Sanity media plugin has been added for asset management
 
-#Next
+### Next
 
 - App router
 - Tailwind
 - SEO titles and descriptions
 
-#SiteSettings
+### SiteSettings
 
 - title
 - description

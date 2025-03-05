@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) 
 
 ---
 
-## Project features:
+# Project features
 
 ### Sanity
 
@@ -54,12 +54,12 @@ This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) 
 
 ---
 
-## Getting Started
+# Getting Started
 
-First, install the dependencies (use --legacy-peer-deps if needed):
+First, install the dependencies (use --legacy-peer-deps as using Next.js 15 + React 19):
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
 Then you need to create an **.env.local** file in the root of the project with the following values populated from your sanity studio:

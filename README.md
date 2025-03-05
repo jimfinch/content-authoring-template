@@ -24,27 +24,27 @@ This is a [Next.js](https://nextjs.org) and Sanity.io project bootstrapped with 
 - Primary navigation
 - Footer navigation
 
-#Menus
+### Menus
 
 - Create a set of links of any document type (pages, artciles, projects, hardcoded internal or external)
 
-#Authors
+### Authors
 
 - Create authors
 
-#Categories
+### Categories
 
 - Create categories/tags
 
-#Projects
+### Projects
 
 - Basic project content starter with title, hero image, portable text body, categories/tags, and related content builder
 
-#Articles
+### Articles
 
 - Basic article content starter with title, hero image, portable text body, categories/tags, and related content builder
 
-#Pages
+### Pages
 
 - Page builder for landing pages that is used to make the homepage from the sample data
 

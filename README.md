@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and tailwind.
 
+---
+
 ## Project features:
 
 ### Sanity
@@ -50,7 +52,7 @@ This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) 
 
 [React Motion](https://motion.dev/) has been implemented for page transitions and component animations when the elements enter and leave the viewport
 
-##
+---
 
 ## Getting Started
 
@@ -84,7 +86,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 Open [http://localhost:3000/studio](http://localhost:3000/studio) to use the Sanity embedded studio.
 
-##
+---
 
 ## Learn More
 

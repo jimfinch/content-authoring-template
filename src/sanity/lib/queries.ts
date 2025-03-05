@@ -1,5 +1,4 @@
 import { defineQuery } from "next-sanity"
-import { groq } from "next-sanity"
 
 export const PROJECTS_QUERY = defineQuery(`
 *[_type == "projects" && defined(slug.current)]|order(publishedAt desc)[0...12]{

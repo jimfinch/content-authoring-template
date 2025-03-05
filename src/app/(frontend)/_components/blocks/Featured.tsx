@@ -17,7 +17,9 @@ type Document = {
 }
 type FeaturedProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
-	{ _type: "featured" }
+	{
+		_type: "featured"
+	}
 > & {
 	title: string
 	documents: Document[]
@@ -44,9 +46,9 @@ export function Featured({ title, documents }: FeaturedProps) {
 			) : null}
 			<div className="container mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-20">
 				{documents &&
-					documents.map((document) => (
+					documents.map((document, index) => (
 						<BaseCard
-							key={document._ref}
+							key={index}
 							href={generateUrl({
 								documentType: document._type,
 								slug: document.slug?.current,

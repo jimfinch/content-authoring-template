@@ -6,7 +6,9 @@ import { animations } from "@/app/(frontend)/_utils/animations"
 
 type Statment = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
-	{ _type: "statement" }
+	{
+		_type: "statement"
+	}
 >
 
 export function Statement({ title }: Statment) {

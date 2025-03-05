@@ -7,7 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 type Statement = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
-	{ _type: "animatedText" }
+	{
+		_type: "animatedText"
+	}
 >
 
 export function AnimatedText({ title }: Statement) {

@@ -8,7 +8,9 @@ import { motion } from "motion/react"
 import { animations } from "@/app/(frontend)/_utils/animations"
 type SplitImageProps = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
-	{ _type: "splitImage" }
+	{
+		_type: "splitImage"
+	}
 >
 
 export function SplitImage({ title, image, orientation }: SplitImageProps) {

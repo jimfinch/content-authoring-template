@@ -59,48 +59,42 @@ This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) 
 
 ---
 
-# Getting Started
+# Quickstart Guide: Sanity CLI
 
-First, install the dependencies (use --legacy-peer-deps as using Next.js 15 + React 19):
-
-```bash
-npm install --legacy-peer-deps
-```
-
-Then you need to create an **.env.local** file in the root of the project with the following values populated from your sanity studio:
-
-```
-NEXT_PUBLIC_SANITY_PROJECT_ID="the-project-id"
-NEXT_PUBLIC_SANITY_DATASET="the-dataset-to-target"
-NEXT_PUBLIC_SANITY_STUDIO_URL="sanity-studio-url"
-SANITY_API_READ_TOKEN="read-token"
-```
-
-Using sanity cli you can upload the **production.tar.gz** dataset which has the sample data:
+Get up and running quickly by initializing this template locally with one simple command:
 
 ```bash
-sanity dataset import [file-name] [the-dataset-to-target]
+npm create sanity@latest -- --template jimfinch/content-authoring-template
 ```
 
-Then to run the project type
+## Import Sample Data
+
+Add sample content easily by importing the provided `production.tar.gz` dataset:
+
+```bash
+npx sanity dataset import production.tar.gz
+```
+
+## Run Your Project
+
+Launch the project locally with:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-Open [http://localhost:3000/studio](http://localhost:3000/studio) to use the Sanity embedded studio.
+Now, explore your project:
+
+- **Website Preview:** [http://localhost:3000](http://localhost:3000)
+- **Sanity Studio (Embedded):** [http://localhost:3000/studio](http://localhost:3000/studio)
 
 ---
 
 <img width="1916" alt="Screenshot 2025-03-05 at 16 47 24" src="https://github.com/user-attachments/assets/77b5f402-461f-4977-8b82-1c3b13e1bcdc" />
 
-
 <img width="1916![Uploading Screenshot 2025-03-05 at 16.47.24.png…]()" alt="Screenshot 2025-03-05 at 16 48 44" src="https://github.com/user-attachments/assets/1fb651d2-17ef-4e74-9aa4-9532501858c8" />
 
-
 <img width="1913" alt="Screenshot 2025-03-05 at 16 49 28" src="https://github.com/user-attachments/assets/2dfebec2-74e5-42f6-b6f4-6ada717b2e0f" />
-
 
 ## Learn More
 

@@ -24,10 +24,10 @@ This is a [Next.js](https://nextjs.org) and [Sanity.io](https://www.sanity.io/) 
 
 ### Site Settings
 
-- title
-- description
-- logo (if using one)
-- a page to be used as the homepage
+- Title
+- Description
+- Logo (if using one)
+- A page to be used as the homepage
 - Primary navigation
 - Footer navigation
 
